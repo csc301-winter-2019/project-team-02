@@ -4,8 +4,18 @@ var router = express.Router();
 // Mongoose import
 var mongoose = require('mongoose');
 
+var env = process.env.NODE_ENV || 'development';
+var uri;
+if (env === 'development') {
+    uri = 'mongodb://localhost:27017/helpthehome'
+} else if (env === 'qa') {
+    uri = process.env.MONGODB_URI
+} else if (env === 'production') {
+    uri = ''
+}
+
 // Mongoose connection to MongoDB
-mongoose.connect('mongodb://localhost:27017/helpthehome', { useNewUrlParser: true }, function (error) {
+mongoose.connect(uri, { useNewUrlParser: true }, function (error) {
     if (error) {
         console.log(error);
     } else {
