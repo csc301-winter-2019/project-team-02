@@ -8,6 +8,8 @@ var env = process.env.NODE_ENV || 'development';
 var uri;
 if (env === 'development') {
     uri = 'mongodb://localhost:27017/helpthehome'
+    // use for small testing only if really necessary
+    // uri = 'mongodb+srv://development:dreamteam@cluster0-krnr4.mongodb.net/helpthehome?retryWrites=true'
 } else if (env === 'qa') {
     uri = process.env.MONGODB_URI
 } else if (env === 'production') {
@@ -19,7 +21,7 @@ mongoose.connect(uri, { useNewUrlParser: true }, function (error) {
     if (error) {
         console.log(error);
     } else {
-	console.log("Connected to mongo!");
+	console.log(`connected to ${uri}`);
     }
 });
 
@@ -27,11 +29,12 @@ mongoose.connect(uri, { useNewUrlParser: true }, function (error) {
 var Schema = mongoose.Schema;
 var JsonSchema = new Schema({
     name: String,
-    type: Schema.Types.Mixed
+    type: Schema.Types.Mixed,
+    coordinates: Array
 });
 
 // Mongoose Model definition
-var Json = mongoose.model('JString', JsonSchema, 'pointcollection');
+var Json = mongoose.model('Jstring', JsonSchema, 'pointscollection');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -42,11 +45,13 @@ router.get('/', function(req, res, next) {
 
 /* GET Map page. */
 router.get('/map', function(req,res) {
-    // we can use the database to fetch some data, for now just hardcode
-    Json.find({},{}, function(e,docs){
+    // we can use the database to fetch a point, SELECT coordinates
+    Json.findOne({name: "points"}, 'coordinates', function(e,point){
+	if (e) return e;
+	// send the view lat, and long.
         res.render('map', {
-            lat : 43.6529,
-            lng : -79.3849
+            lat : point.coordinates[1],
+            lng : point.coordinates[0]
         });
     });
 });
