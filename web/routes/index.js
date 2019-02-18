@@ -20,6 +20,8 @@ if (env === 'development') {
 mongoose.connect(uri, { useNewUrlParser: true }, function (error) {
     if (error) {
         console.log(error);
+        console.log("App was not able to connect to the mongo server!");
+        console.log("... double check that the mongo server is running locally");
     } else {
 	console.log(`connected to ${uri}`);
     }
