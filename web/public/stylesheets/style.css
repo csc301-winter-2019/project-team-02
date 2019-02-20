@@ -1,0 +1,26 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+#map {
+  width: 65%;
+  height: 100%;
+  float: right;
+}
+body {
+  margin:0;
+  padding:0px;
+  font:14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color:#00B7FF;
+}
+#sidebar {
+  width: 35%;
+  height: 100%;
+  float: left;
+  background-color: #e70000;
+}
+h1 {
+  text-align: center;
+}
