@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Text, Alert, AppRegistry, Button, StyleSheet, View, TextInput } from 'react-native';
 
-export default class ButtonBasics extends Component {
+export default class Form1 extends Component {
   _onPressButton1() {
     Alert.alert('Thanks for letting us know!')
   }
