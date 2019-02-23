@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import {Text, Alert, AppRegistry, Button, StyleSheet, View, TextInput } from 'react-native';
 
 export default class ButtonBasics extends Component {
-  _onPressButton() {
+  _onPressButton1() {
     Alert.alert('Thanks for letting us know!')
+  }
+  _onPressButton2() {
+    Alert.alert('Continue:')
   }
   constructor(props) {
     super(props);
@@ -49,10 +52,16 @@ export default class ButtonBasics extends Component {
           />
 
           {/*additional questions*/}
+          <View style={{padding: 40}}>
+            <Button
+              onPress={this._onPressButton1}
+              title="I do not have time to speak with the individual, Submit!"
+            />
+          </View>
 
           <Button
-            onPress={this._onPressButton}
-            title="Submit!"
+            onPress={this._onPressButton2}
+            title="I have additional info!"
           />
         </View>
 
