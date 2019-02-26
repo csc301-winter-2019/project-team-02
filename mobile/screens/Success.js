@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import {Text, Alert, AppRegistry, Button, StyleSheet, View } from 'react-native';
+import {Text, Alert, AppRegistry, Button, StyleSheet, View, BackHandler } from 'react-native';
+
 
 export default class Success extends Component {
   _onPressButton() {
-    exitApp()
+    BackHandler.exitApp()
   }
 
 
   render() {
     return (
-      
 
         <View style={{padding: 40}}>
           <Text>Thanks for letting us know.</Text>
