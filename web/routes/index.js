@@ -47,13 +47,10 @@ router.get('/', function(req, res, next) {
 
 /* GET Map page. */
 router.get('/map', function(req,res) {
-    // we can use the database to fetch a point, SELECT coordinates
-    Json.findOne({name: "points"}, 'coordinates', function(e,point){
-	if (e) return e;
-	// send the view lat, and long.
+	// send the view lat, and long. city center
         res.render('map', {
-            lat : point.coordinates[1],
-            lng : point.coordinates[0]
+            lat : 43.654127,
+            lng : -79.383370
         });
     });
 });
