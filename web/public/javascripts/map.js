@@ -12,10 +12,12 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}
 	ext: 'png'
 }).addTo(map);
 
-// Create point feature for somewhere downtown
-var myDataPoint = L.marker([43.6529, -79.3849]).addTo(map);
-
-// Bind popup to Data Point object
-myDataPoint.bindPopup("<h3>City Hall (not really)</h3><p>Toronto, ON<br>Information about city hall.</p>");
-
-map.setZoom(13);
+L.geoJson(points, {
+	pointToLayer: function (feature, latlng) {
+		//return L.circleMarker(latlng);
+		return L.marker(latlng);
+	}
+}).bindPopup(function (layer) {
+	// layer.feature.geometry gives you access to all the fields
+	return "<p>" + JSON.stringify(layer.feature.geometry) + "</p>";
+}).addTo(map)
