@@ -6,6 +6,6 @@ block content
 
 	script(type='text/javascript').
 		var map = L.map('map').setView([#{lat},#{lng}], 13);
-		var dumbpoints = !{JSON.stringify(points)};
-		//console.log(dumbpoints);
+		var points = !{JSON.stringify(points)};
+		console.log(points);
 	script(src='/javascripts/map.js')

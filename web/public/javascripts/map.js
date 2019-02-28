@@ -12,11 +12,12 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}
 	ext: 'png'
 }).addTo(map);
 
-L.geoJson(dumbpoints, {
+L.geoJson(points, {
 	pointToLayer: function (feature, latlng) {
 		//return L.circleMarker(latlng);
 		return L.marker(latlng);
 	}
 }).bindPopup(function (layer) {
-	return layer.feature.geometry.another;
+	// layer.feature.geometry gives you access to all the fields
+	return "<p>" + JSON.stringify(layer.feature.geometry) + "</p>";
 }).addTo(map)
