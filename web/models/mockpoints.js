@@ -1,16 +1,32 @@
 var mongoose = require('mongoose');
 
+// Mongoose Schema definition
 var Schema = mongoose.Schema;
 var dumbJsonSchema = new Schema({
 	type: String,
-	coordinates: Array
+	coordinates: Array,
+	ageRange: String,
+	clothingDescription: String,
+	isInjured: Boolean,
+	reasonForHelp: String
 });
 
 // Mongoose Model definition
 var dumbJson = mongoose.model('dumbJstring', dumbJsonSchema, 'dumbpointscollection');
 
-exports.get_dumb_points = function(callback) {
-	dumbJson.find({}).exec(function(err, docs){
-		callback(err, docs)
+// this function gets ALL the points from the db
+// returns the entire document without modifications
+exports.get_points = function(callback) {
+	dumbJson.find({}).exec(function(err, docs) {
+		if (err) callback(err, null);
+		callback(null, docs);
+	});
+}
+
+// this function stores A user report into the db
+exports.save_request = function(data, callback) {
+	dumbJson.create(data, function(err, result) {
+		if (err) callback(err, null);
+		callback(null, result);
 	});
 }

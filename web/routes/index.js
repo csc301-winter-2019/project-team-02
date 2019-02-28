@@ -11,13 +11,34 @@ router.get('/', function(req, res, next) {
 
 /* GET Map page. */
 router.get('/map', function(req,res) {
-	// load the map with mockdata
-	Mockpoints.get_dumb_points(function(err, points){
+	// load the map with all the points
+	// Mockpoints.get_points(function(err, points){
+	Points.get_points(function(err, points){
 		res.render('map', {
 			lat : 43.665234,
 			lng : -79.383370,
 			points: points
 		});
+	});
+});
+
+router.post('/mobilerequest', function(req, res) {
+	var data = {
+		'coordinates': req.body.coordinates,
+		'type': req.body.type,
+		'isInjured': req.body.isInjured,
+		'reasonForHelp': req.body.reasonForHelp,
+		'ageRange': req.body.ageRange,
+		'clothingDescription': req.body.clothingDescription
+	}
+	Points.save_request(data, function(err, result) {
+		if (err) {
+			console.log(`err inserting mobile request into db: ${err}`);
+			res.status(500).send({ error: "boo:(" });
+		} else {
+			console.log(result);
+			res.status(200).send({'status': 'success', 'data': data});
+		}
 	});
 });
 
