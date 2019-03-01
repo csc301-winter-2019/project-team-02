@@ -11,8 +11,6 @@
 
 ## Process
 
-(Optional:) Quick introduction
-
 #### Roles & responsibilities
 
 Describe the different roles on the team and the responsibilities associated with each role.
@@ -25,13 +23,11 @@ List each team member and:
 
 | Name            | Responsibilities                       | Strengths                    | Weaknesses                     |
 |-----------------|----------------------------------------|------------------------------|--------------------------------|
-| Xuhao Yu        | "back end", integration                | js, android, data management | memory, ios, react             |
-| Samarth Agarwal | "back end", database                   | Java, Databases, HTML/CSS    | JavaScript, Node.js, React     |
-| Letian Zhao     | "front end"                            | Java, JavaScript, SQL        | React, Swift,  App Development |
-| Ivan Shen       | "front end", Testing, Trello moderator | Java, JavaScript, Testing    | Expo, Swift, SQL, React        |
-| Mohammed Ahmed  | "back end", database                   | Java, Kanban, Node.js        | React, Swift, Data Management  |
 | Andrew Mihai    | "front end", meetings note taker       | Java, MVC methodology, Swift | React,  Databases, Javascript  |
+| Ivan Shen       | "front end", Testing, Trello moderator | Java, JavaScript, Testing    | Expo, Swift, SQL, React        |
 | Kumar Damani    | Scrum master, server side, API         | web, sql, kanban             | React, graphic design, apps    |
+| Mohammed Ahmed  | "back end", database                   | Java, Kanban, Node.js        | React, Swift, Data Management  |
+| Samarth Agarwal | "back end", database                   | Java, Databases, HTML/CSS    | JavaScript, Node.js, React     |
 
 #### Team Rules
 
@@ -44,16 +40,15 @@ Communications:
 > Code reviews are discussed in the comment section of the pull request.
 > A github wiki is also maintained for documentation.
 > Frequency is ~3-5 hrs for each of them.
- * If you have a partner project, what is your process (in detail) for communicating with your partner?
 
 Meetings:
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
 > We hold an in-person sprint meeting every Tuesday and everyone is expected to attend that meeting. We understand that sometimes other commitments might take priority and the person may not be able to attend in-person, so that person can also attend via video chat over Discord.
-> During the meetings, the scrum master goes over each item in the agenda (distributed beforehand). This will involve getting to know what each person has done over the last week, and are currently working on. Readying tasks for the upcoming sprint by ensuring the developer understand exactly what is expected from the task.
+> During the meetings, the scrum master goes over each item in the agenda (distributed beforehand). This will involve getting to know what each person has done over the last week, and are currently working on. Readying tasks for the upcoming sprint by ensuring the developer understands exactly what is expected from the task.
 
 Conflict Resolution:
  * List at least three team scenarios/conflicts you discussed in lecture and how you decided you will resolve them. Indecisions? Non-responsive team members? Any other scenarios you can think of?
-> Asked on piazza if we need to come up with this again.
+> Same as iteration-01, see [here](https://github.com/csc301-winter-2019/project-team-02/blob/master/deliverables/iteration-01.planṃd#conflict-resolution).
 
 #### Events
 
@@ -61,10 +56,10 @@ Describe meetings (and other events) you are planning to have:
  * When and where? Recurring or ad hoc? In-person or online?
  > We have mandatory in-person meetings every Tuesday from 3-6 pm inside a booked study room at the Gerstein Library. We have an online meeting on Fridays from 4-6 pm if needed.
  * What's the purpose of each meeting?
- > The purpose of each meeting is to determine what everbody has done the previous week and what features need to be worked on for the current week.
+ > The purpose of each meeting is to determine what everybody has done over the previous week and what tasks need to be worked on for the upcoming week.
  * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
 
-> Stays same as d1
+> Same as iteration-01, see [here](https://github.com/csc301-winter-2019/project-team-02/blob/master/deliverables/iteration-01.planṃd#conflict-resolution).
 
 #### Artifacts
 
