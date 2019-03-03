@@ -32,4 +32,3 @@ Plan
 - Conflict scenarios are well fleshed out. 
 
 Overall Quality
-- 
