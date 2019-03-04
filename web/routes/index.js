@@ -1,36 +1,24 @@
 var express = require('express');
 var router = express.Router();
-// Mongoose import
-var mongoose = require('mongoose');
-// Mongoose Schema definition
-var Schema = mongoose.Schema;
-
-var JsonSchema = new Schema({
-	name: String,
-	type: Schema.Types.Mixed,
-	coordinates: Array,
-	ageRange: String,
-	clothingDescription: String,
-	isInjured: Boolean,
-	reasonForHelp: String
-});
-
-// Mongoose Model definition
-var Json = mongoose.model('Jstring', JsonSchema, 'pointscollection');
+var Mockpoints = require('../models/mockpoints');
+var Points = require('../models/points');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	// for now just redirect to /map
-	//res.render('index', { title: 'Welcome' });
 	res.redirect('/map');
 });
 
 /* GET Map page. */
 router.get('/map', function(req,res) {
-	// send the view lat, and long. city center
-	res.render('map', {
-		lat : 43.654127,
-		lng : -79.383370
+	// load the map with all the points
+	// Mockpoints.get_points(function(err, points){
+	Points.get_points(function(err, points){
+		res.render('map', {
+			lat : 43.665234,
+			lng : -79.383370,
+			points: points
+		});
 	});
 });
 
@@ -43,7 +31,7 @@ router.post('/mobilerequest', function(req, res) {
 		'ageRange': req.body.ageRange,
 		'clothingDescription': req.body.clothingDescription
 	}
-	Json.create(data, function(err, result) {
+	Points.save_request(data, function(err, result) {
 		if (err) {
 			console.log(`err inserting mobile request into db: ${err}`);
 			res.status(500).send({ error: "boo:(" });
