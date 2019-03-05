@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import GreetingPage from './components/GreetingPage';
-import FormPage from './components/FormPage';
+import FormPage from './components/Form1';
 
 
 const RootStack = createStackNavigator( {GreetingPage: GreetingPage, FormPage: FormPage,},

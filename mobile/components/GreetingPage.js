@@ -1,10 +1,55 @@
 import React, { Component } from 'react';
-import { Text, View, Alert, StyleSheet, Button, AppRegistry, Navigator, TouchableHighlight} from 'react-native';
+import { Text, View, Alert, StyleSheet, Button, AppRegistry, Navigator, TouchableHighlight, Platform} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { Location, Permissions, Constants } from 'expo';
 
 export default class GreetingPage extends Component {
 	//Every component needs a render() function
+  state = {
+    location: null,
+    errorMessage: null,
+  };
+
+  componentWillMount() {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+      });
+    } else {
+      this._getLocationAsync();
+    }
+  }
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+     this.setState({ location });
+  };
+
+  getCurrentLocation = () => {
+
+    navigator.geolocation.getCurrentPosition(
+        position => {
+          this.recorded_coordinates = JSON.stringify([position.coords.latitude, position.coords.longitude]);
+        },
+      );
+  }
+
+  moveToFormPage = () => {
+    this._getLocationAsync;
+    const coordinates = [this.state.location.coords.longitude, this.state.location.coords.latitude]
+    // Alert.alert(JSON.stringify(coordinates));
+    this.props.navigation.navigate('FormPage', {coordinates : coordinates});
+  }
+
+
   render() {
     return (
     	//<View> acts like the way <div> does in JavaScript
@@ -22,7 +67,8 @@ export default class GreetingPage extends Component {
 
       	<TouchableHighlight 
       		style={styles.first_button_container} 
-      		onPress={() => this.props.navigation.navigate('FormPage')}>
+      		onPress={() => { this.moveToFormPage()
+          }}>
 
       		<View style={styles.press_button}>
 
