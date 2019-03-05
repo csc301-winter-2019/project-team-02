@@ -14,7 +14,7 @@ export default class GreetingPage extends Component {
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
-        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+        errorMessage: 'This will not work on an android device',
       });
     } else {
       this._getLocationAsync();
@@ -33,19 +33,13 @@ export default class GreetingPage extends Component {
      this.setState({ location });
   };
 
-  getCurrentLocation = () => {
-
-    navigator.geolocation.getCurrentPosition(
-        position => {
-          this.recorded_coordinates = JSON.stringify([position.coords.latitude, position.coords.longitude]);
-        },
-      );
-  }
-
   moveToFormPage = () => {
     this._getLocationAsync;
-    const coordinates = [this.state.location.coords.longitude, this.state.location.coords.latitude]
-    // Alert.alert(JSON.stringify(coordinates));
+    if (this.state.location === null)  {
+      Alert.alert("There was a problem accessing your location");
+      return;
+    }
+    const coordinates = [this.state.location.coords.longitude, this.state.location.coords.latitude];
     this.props.navigation.navigate('FormPage', {coordinates : coordinates});
   }
 

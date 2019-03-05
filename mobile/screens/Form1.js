@@ -3,10 +3,10 @@ import {Text, Alert, AppRegistry, Button, StyleSheet, View, TextInput } from 're
 
 export default class Form1 extends Component {
   _onPressButton1() {
-    //const {navigation} = this.props;
-    //const coordinates = navigation.getparam('coordinates');
-    var coordinates = this.coordinates ? coordinates : [];
-    Alert.alert("Thank you for your response.")
+    const { navigation } = this.props;
+    const coordinates = navigation.getParam('coordinates');
+    //var coordinates = this.coordinates ? coordinates : [];
+    Alert.alert("Thank you for your response.");
     fetch('https://helpthehome-qa.herokuapp.com/mobilerequest', {
       method: 'POST',
       headers: {
@@ -67,6 +67,12 @@ export default class Form1 extends Component {
           <Button
               onPress={() => this._onPressButton1()}
               title="Submit!"
+          />
+        </View>
+        <View style={{padding: 40}}>
+          <Button
+              onPress={() =>  this.props.navigation.navigate('GreetingPage')}
+              title="Go Back"
           />
         </View>
       </View>
