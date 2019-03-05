@@ -19,13 +19,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('./routes/sse'));
 
 var env = process.env.NODE_ENV || 'development';
 var uri;
 if (env === 'development') {
-	uri = 'mongodb://localhost:27017/helpthehome'
+	// uri = 'mongodb://localhost:27017/helpthehome'
 	// use for small testing only if really necessary
-	// uri = 'mongodb+srv://development:dreamteam@cluster0-krnr4.mongodb.net/helpthehome?retryWrites=true'
+	uri = 'mongodb+srv://development:dreamteam@cluster0-krnr4.mongodb.net/helpthehome?retryWrites=true'
 } else if (env === 'qa') {
 	uri = process.env.MONGODB_URI
 } else if (env === 'production') {
@@ -45,7 +46,6 @@ mongoose.connect(uri, { useNewUrlParser: true }, function (error) {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

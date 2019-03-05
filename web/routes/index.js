@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Mockpoints = require('../models/mockpoints');
 var Points = require('../models/points');
-
+const connections = [];
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	// for now just redirect to /map
@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
 
 /* GET Map page. */
 router.get('/map', function(req,res) {
+	// Stream.emit("push", "test", { msg: "admit one" });
 	// load the map with all the points
 	// Mockpoints.get_points(function(err, points){
 	Points.get_points(function(err, points){
@@ -36,10 +37,20 @@ router.post('/mobilerequest', function(req, res) {
 			console.log(`err inserting mobile request into db: ${err}`);
 			res.status(500).send({ error: "boo:(" });
 		} else {
+			for(var i = 0; i < connections.length; i++) {
+				connections[i].sseSend(data);
+			}
 			console.log(result);
 			res.status(200).send({'status': 'success', 'data': data});
 		}
 	});
+	
 });
 
+
+router.get('/stream', function(req, res){
+	res.sseSetup()
+	res.sseSend('ok');
+	connections.push(res);
+});
 module.exports = router;
