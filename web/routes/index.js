@@ -1,56 +1,44 @@
 var express = require('express');
 var router = express.Router();
-
-// Mongoose import
-var mongoose = require('mongoose');
-
-var env = process.env.NODE_ENV || 'development';
-var uri;
-if (env === 'development') {
-	uri = 'mongodb://localhost:27017/helpthehome'
-	// use for small testing only if really necessary
-	// uri = 'mongodb+srv://development:dreamteam@cluster0-krnr4.mongodb.net/helpthehome?retryWrites=true'
-} else if (env === 'qa') {
-	uri = process.env.MONGODB_URI
-} else if (env === 'production') {
-	uri = ''
-}
-
-// Mongoose connection to MongoDB
-mongoose.connect(uri, { useNewUrlParser: true }, function (error) {
-	if (error) {
-		console.log(error);
-		console.log("App was not able to connect to the mongo server!");
-		console.log("... double check that the mongo server is running locally");
-	} else {
-	console.log(`connected to ${uri}`);
-	}
-});
-
-// Mongoose Schema definition
-var Schema = mongoose.Schema;
-var JsonSchema = new Schema({
-	name: String,
-	type: Schema.Types.Mixed,
-	coordinates: Array
-});
-
-// Mongoose Model definition
-var Json = mongoose.model('Jstring', JsonSchema, 'pointscollection');
+var Mockpoints = require('../models/mockpoints');
+var Points = require('../models/points');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	// for now just redirect to /map
-	//res.render('index', { title: 'Welcome' });
 	res.redirect('/map');
 });
 
 /* GET Map page. */
 router.get('/map', function(req,res) {
-	// send the view lat, and long. city center
-	res.render('map', {
-		lat : 43.654127,
-		lng : -79.383370
+	// load the map with all the points
+	// Mockpoints.get_points(function(err, points){
+	Points.get_points(function(err, points){
+		res.render('map', {
+			lat : 43.665234,
+			lng : -79.383370,
+			points: points
+		});
+	});
+});
+
+router.post('/mobilerequest', function(req, res) {
+	var data = {
+		'coordinates': req.body.coordinates,
+		'type': req.body.type,
+		'isInjured': req.body.isInjured,
+		'reasonForHelp': req.body.reasonForHelp,
+		'ageRange': req.body.ageRange,
+		'clothingDescription': req.body.clothingDescription
+	}
+	Points.save_request(data, function(err, result) {
+		if (err) {
+			console.log(`err inserting mobile request into db: ${err}`);
+			res.status(500).send({ error: "boo:(" });
+		} else {
+			console.log(result);
+			res.status(200).send({'status': 'success', 'data': data});
+		}
 	});
 });
 
