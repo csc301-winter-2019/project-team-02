@@ -3,74 +3,73 @@ import {Text, Alert, AppRegistry, Button, StyleSheet, View, TextInput } from 're
 
 export default class Form1 extends Component {
   _onPressButton1() {
-    Alert.alert('Thanks for letting us know!')
-  }
+    //const {navigation} = this.props;
+    //const coordinates = navigation.getparam('coordinates');
+    var coordinates = this.coordinates ? coordinates : [];
+    Alert.alert("Thank you for your response.")
+    fetch('https://helpthehome-qa.herokuapp.com/mobilerequest', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        'coordinates': coordinates,
+		    'type': "Point",
+		    'isInjured': this.state.injured,
+		    'reasonForHelp': this.state.why,
+		    'ageRange': this.state.age,
+        'clothingDescription': this.state.appearance
+    }),
+  });
+}
   _onPressButton2() {
     Alert.alert('Continue:')
   }
   constructor(props) {
     super(props);
-    this.state = {age: '',
-		name: '',
-		appearance: '',
-		injured: false,
-		why: ''};
+      this.state = {
+        age: '',
+        appearance: '',
+		    injured: false,
+        why: ''
+      };
   }
 
   render() {
     return (
-      
-
-        <View style={{padding: 40}}>
-          <Text>Age:</Text>
+      <View style={{padding: 40}}>
+        <Text>Age:</Text>
           <TextInput
             style={{height: 40}}
             placeholder="(Estimate if unknown)"
-            onChangeText={(age) => this.setState({age})}
+            onChangeText={(text) => this.setState({age:text})}
           />
-          
-          
-          <Text>Name:</Text>
+        <Text>Appearance:</Text>
           <TextInput
             style={{height: 40}}
-            placeholder="Type the name here"
-            onChangeText={(name) => this.setState({name})}
-          />
-          <Text>Appearance:</Text>
-          <TextInput
-            style={{height: 40}}
-            placeholder="What are they Wearing"
+            placeholder="What are they wearing"
             onChangeText={(appearance) => this.setState({appearance})}
           />
-          <Text>Injured?</Text>
-          {/* insert radio button???*/}
-          <Text>Please let us know why do you think they need help</Text>
+        <Text>Are they injured?</Text>
           <TextInput
             style={{height: 40}}
-            placeholder="Reason"
-            onChangeText={(why) => this.setState({why})}
+            placeholder="If so, please explain the injury"
+            onChangeText={(injured) => this.setState({injured})}
           />
-
-          {/*additional questions*/}
-          <View style={{padding: 40}}>
-            <Button
-              onPress={this._onPressButton1}
-              title="I do not have time to speak with the individual, Submit!"
+        <Text>Reason for help?</Text>
+            <TextInput
+              style={{height: 40}}
+              placeholder="Why does the individual require assistance"
+              onChangeText={(why) => this.setState({why})}
             />
-          </View>
-
+        <View style={{padding: 40}}>
           <Button
-            onPress={this._onPressButton2}
-            title="I have additional info!"
+              onPress={() => this._onPressButton1()}
+              title="Submit!"
           />
         </View>
-
-
-
+      </View>
     );
   }
 }
-
-
-
-
