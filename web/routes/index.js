@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
 
 /* GET Map page. */
 router.get('/map', function(req,res) {
-	// Stream.emit("push", "test", { msg: "admit one" });
 	// load the map with all the points
 	// Mockpoints.get_points(function(err, points){
 	Points.get_points(function(err, points){
