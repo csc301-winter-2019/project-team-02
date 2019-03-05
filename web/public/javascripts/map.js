@@ -24,7 +24,7 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}
 	ext: 'png'
 }).addTo(map);
 plotPointsOnMap(points);
-if (!!window.EventSource) {
+if (window.EventSource) {
 	var source = new EventSource('/stream');
   
 	source.addEventListener('message', function(e) {
