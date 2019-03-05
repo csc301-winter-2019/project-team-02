@@ -36,6 +36,7 @@ router.post('/mobilerequest', function(req, res) {
 			console.log(`err inserting mobile request into db: ${err}`);
 			res.status(500).send({ error: "boo:(" });
 		} else {
+			// send event to all connections
 			for(var i = 0; i < connections.length; i++) {
 				connections[i].sseSend(data);
 			}
@@ -48,8 +49,11 @@ router.post('/mobilerequest', function(req, res) {
 
 
 router.get('/stream', function(req, res){
-	res.sseSetup()
+	// set up server side event (communication line between front end and server)
+	res.sseSetup();
+	// send an event to the front end to open the connection
 	res.sseSend('ok');
+	// push connection to connection array
 	connections.push(res);
 });
 module.exports = router;
