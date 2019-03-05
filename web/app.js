@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('./routes/sse'));
 
 var env = process.env.NODE_ENV || 'development';
 var uri;
@@ -45,7 +46,6 @@ mongoose.connect(uri, { useNewUrlParser: true }, function (error) {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
