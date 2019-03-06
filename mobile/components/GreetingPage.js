@@ -55,19 +55,19 @@ export default class GreetingPage extends Component {
 
       	<View style={styles.titleContainer}>
       		<Text style={styles.title}>
-      			[Place text here!]
+      			Ensure that location services are enabled!
       		</Text>
       	</View>
 
-      	<TouchableHighlight 
-      		style={styles.first_button_container} 
+      	<TouchableHighlight
+      		style={styles.first_button_container}
       		onPress={() => { this.moveToFormPage()
           }}>
 
       		<View style={styles.press_button}>
 
       			<View>
-      			<Text style={styles.current_location_title}> 
+      			<Text style={styles.current_location_title}>
       				Use Current Location
       			</Text>
       			</View>
@@ -86,7 +86,7 @@ export default class GreetingPage extends Component {
       		<View style={styles.press_button}>
 
       			<View>
-      			<Text style={styles.current_location_title}> 
+      			<Text style={styles.current_location_title}>
       				Drop Pin
       			</Text>
       			</View>
@@ -122,7 +122,8 @@ const styles = StyleSheet.create( {
   	marginTop: 10,
   	textAlign: 'center',
   	opacity: 0.9,
-  	fontSize: 30
+  	fontSize: 18,
+    fontStyle: 'italic'
   },
   current_location_title: {
   	color: '#FFF',

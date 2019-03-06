@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {Text, Alert, AppRegistry, Button, StyleSheet, View, TextInput } from 'react-native';
+import {Text, Alert, AppRegistry, StyleSheet, View } from 'react-native';
+import { Button, Input, CheckBox } from 'react-native-elements';
 
 export default class Form1 extends Component {
   _onPressButton1() {
     const { navigation } = this.props;
     const coordinates = navigation.getParam('coordinates');
     //var coordinates = this.coordinates ? coordinates : [];
-    Alert.alert("Thank you for your response.");
     fetch('https://helpthehome-qa.herokuapp.com/mobilerequest', {
       method: 'POST',
       headers: {
@@ -15,13 +15,18 @@ export default class Form1 extends Component {
       },
       body: JSON.stringify({
         'coordinates': coordinates,
-		    'type': "Point",
-		    'isInjured': this.state.injured,
-		    'reasonForHelp': this.state.why,
-		    'ageRange': this.state.age,
+        'type': "Point",
+        'isInjured': this.state.injured,
+        'reasonForHelp': this.state.why,
+        'ageRange': this.state.age,
         'clothingDescription': this.state.appearance
     }),
   });
+  // TODO: handle the response from the serve and decide what to display
+  // based on that
+  // for now just to back to the home page
+  Alert.alert("You will now be redirected to the main page");
+  this.props.navigation.navigate('GreetingPage');
 }
   _onPressButton2() {
     Alert.alert('Continue:')
@@ -31,7 +36,7 @@ export default class Form1 extends Component {
       this.state = {
         age: '',
         appearance: '',
-		    injured: false,
+        injured: false,
         why: ''
       };
   }
@@ -40,37 +45,37 @@ export default class Form1 extends Component {
     return (
       <View style={{padding: 40}}>
         <Text>Age:</Text>
-          <TextInput
+          <Input
             style={{height: 40}}
-            placeholder="(Estimate if unknown)"
-            onChangeText={(text) => this.setState({age:text})}
+            placeholder="Estimate is fine"
+            onChangeText={(age) => this.setState({age})}
           />
         <Text>Appearance:</Text>
-          <TextInput
+          <Input
             style={{height: 40}}
-            placeholder="What are they wearing"
+            placeholder="What are they wearing?"
             onChangeText={(appearance) => this.setState({appearance})}
           />
-        <Text>Are they injured?</Text>
-          <TextInput
-            style={{height: 40}}
-            placeholder="If so, please explain the injury"
-            onChangeText={(injured) => this.setState({injured})}
+        <CheckBox
+            center
+            title="Are they injured?"
+            checked={this.state.injured}
+            onPress={() => this.setState({ injured: !this.state.injured })}
           />
         <Text>Reason for help?</Text>
-            <TextInput
+            <Input
               style={{height: 40}}
-              placeholder="Why does the individual require assistance"
+              placeholder="Please keep it short"
               onChangeText={(why) => this.setState({why})}
             />
         <View style={{padding: 40}}>
           <Button
+              buttonStyle={{backgroundColor:"green"}}
               onPress={() => this._onPressButton1()}
               title="Submit!"
           />
-        </View>
-        <View style={{padding: 40}}>
           <Button
+              containerStyle={{paddingTop: 10}}
               onPress={() =>  this.props.navigation.navigate('GreetingPage')}
               title="Go Back"
           />
