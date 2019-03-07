@@ -28,6 +28,7 @@ a {
   float: left;
   background-color: lightgrey;
   border-radius: 10px;
+  visibility: hidden;
 }
 #point {
   background-color: #0CC5EA;
