@@ -21,31 +21,48 @@ a {
   left: 5px;
   z-index: 2;
   width: 350px;
-  height: 250px;
-  max-height: 250px;
-  overflow: auto;
-  position: relative;
+  height: 275px;
+  max-height: 275px;
+/*  overflow: auto;
+*/  position: relative;
   float: left;
   background-color: lightgrey;
   border-radius: 10px;
   visibility: hidden;
+}
+#details-header {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#point-container {
+    overflow: auto;
+    max-height: 195px;
 }
 #point {
   background-color: #0CC5EA;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 5px;
   padding: 5px;
   border-radius: 10px;
 }
+#close-btn-container {
+  position: fixed;
+  height: 30px;
+  top: 250px;
+  background-color: lightgrey;
+  width: 350px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
 #close-btn {
   background-color: red;
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
+  position: relative;
+  margin-top: 4px;
+  float: right;
+  margin-right: 20px;
   border-radius: 10px;
   width: 100px;
-}
-h1 {
-  text-align: center;
 }

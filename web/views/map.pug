@@ -1,16 +1,18 @@
 extends layout.pug
 block content
 	#sidebar
-		h1 Details
-		#point
-			strong Age range: 
-			br.point-break
-			strong Clothing description: 
-			br.point-break
-			strong Injury status: 
-			br.point-break
-			strong Reason for help: 
-		button#close-btn Close
+		h1#details-header Details
+		#point-container
+			#point
+				strong Age range: 
+				br.point-break
+				strong Clothing description: 
+				br.point-break
+				strong Injury status: 
+				br.point-break
+				strong Reason for help: 
+		#close-btn-container
+			button#close-btn Close
 
 	#map
 
