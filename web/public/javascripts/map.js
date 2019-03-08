@@ -27,5 +27,6 @@ L.geoJson(points, {
 	return "<p>" + JSON.stringify(layer.feature.geometry) + "</p>";
 }).addTo(map)
 
-// rezoom the map so that all the markers fit in the view
-map.fitBounds(latlngbounds);
+// rezoom the map so that all the markers fit in the view, add 20% padding so
+// that marker dont cut off
+map.fitBounds(latlngbounds.pad(0.20));
