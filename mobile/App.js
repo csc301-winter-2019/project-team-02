@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Alert, StyleSheet, Button, AppRegistry, Navigator, TouchableHighlight} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-export default class HelloWorldApp extends Component {
-	//Every component needs a render() function
-  render() {
-    return (
-    	//<View> acts like the way <div> does in JavaScript
-    	//style={...} stores properties about where you want the component to be placed
-    	//and how you want it to look. It's similar to adding CSS styles to HTML elements
-    	//when creating web pages
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Hello world!</Text>
-      </View>
-    );
-  }
-}
+import GreetingPage from './components/GreetingPage';
+import FormPage from './screens/Form1';
+
+
+const RootStack = createStackNavigator( {GreetingPage: GreetingPage, FormPage: FormPage,},
+	{headerMode: 'none'})
+
+const App = createAppContainer(RootStack)
+
+export default App;
+	
