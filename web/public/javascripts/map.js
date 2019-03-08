@@ -7,12 +7,17 @@ function plotPointsOnMap(points) {
 	L.geoJson(points, {
 		pointToLayer: function (feature, latlng) {
 			//return L.circleMarker(latlng);
+			latlngbounds.extend(latlng);
 			return L.marker(latlng);
 		}
 	}).bindPopup(function (layer) {
 		// layer.feature.geometry gives you access to all the fields
 		return "<p>" + JSON.stringify(layer.feature.geometry) + "</p>";
 	}).addTo(map)
+
+	// rezoom the map so that all the markers fit in the view, add 20% padding so
+	// that marker dont cut off
+	map.fitBounds(latlngbounds.pad(0.20));
 }
 
 // different basemap
@@ -23,10 +28,15 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}
 	maxZoom: 18,
 	ext: 'png'
 }).addTo(map);
+
+// keep track of the boundary of the markers so that we can update the
+// map to fit them all
+var latlngbounds = new L.latLngBounds();
+
 plotPointsOnMap(points);
 if (window.EventSource) {
 	var source = new EventSource('/stream');
-  
+
 	source.addEventListener('message', function(e) {
 		var data = JSON.parse(e.data);
 		if (data.coordinates) {
@@ -34,11 +44,11 @@ if (window.EventSource) {
 			plotPointsOnMap(points);
 		}
 	}, false)
-  
+
 	source.addEventListener('open', function(e) {
 	  console.log("Connection was opened")
 	}, false)
-  
+
 	source.addEventListener('error', function(e) {
 	  if (e.readyState == EventSource.CLOSED) {
 		console.log("Connection was closed")
