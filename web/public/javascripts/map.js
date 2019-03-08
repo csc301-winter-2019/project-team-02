@@ -12,12 +12,20 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}
 	ext: 'png'
 }).addTo(map);
 
+// keep track of the boundary of the markers so that we can update the
+// map to fit them all
+var latlngbounds = new L.latLngBounds();
+
 L.geoJson(points, {
 	pointToLayer: function (feature, latlng) {
 		//return L.circleMarker(latlng);
+		latlngbounds.extend(latlng);
 		return L.marker(latlng);
 	}
 }).bindPopup(function (layer) {
 	// layer.feature.geometry gives you access to all the fields
 	return "<p>" + JSON.stringify(layer.feature.geometry) + "</p>";
 }).addTo(map)
+
+// rezoom the map so that all the markers fit in the view
+map.fitBounds(latlngbounds);
