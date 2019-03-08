@@ -80,15 +80,13 @@ export default class GreetingPage extends Component {
 
       	</TouchableHighlight>
 
-      	<TouchableHighlight
-      		style={styles.second_button_container}
-      		onPress={() => this.props.navigation.navigate('FormPage')}>
+      	<TouchableHighlight style={styles.second_button_container}>  
       		<View style={styles.press_button}>
 
       			<View>
-      			<Text style={styles.current_location_title}>
-      				Drop Pin
-      			</Text>
+      			 <Text style={styles.current_location_title}>
+      			  Drop Pin
+      			 </Text>
       			</View>
 
       			<View marginTop = {20}>
