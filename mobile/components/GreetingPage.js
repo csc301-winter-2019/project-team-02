@@ -1,10 +1,49 @@
 import React, { Component } from 'react';
-import { Text, View, Alert, StyleSheet, Button, AppRegistry, Navigator, TouchableHighlight} from 'react-native';
+import { Text, View, Alert, StyleSheet, Button, AppRegistry, Navigator, TouchableHighlight, Platform} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { Location, Permissions, Constants } from 'expo';
 
 export default class GreetingPage extends Component {
 	//Every component needs a render() function
+  state = {
+    location: null,
+    errorMessage: null,
+  };
+
+  componentWillMount() {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage: 'This will not work on an android device',
+      });
+    } else {
+      this._getLocationAsync();
+    }
+  }
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+     this.setState({ location });
+  };
+
+  moveToFormPage = () => {
+    this._getLocationAsync;
+    if (this.state.location === null)  {
+      Alert.alert("There was a problem accessing your location");
+      return;
+    }
+    const coordinates = [this.state.location.coords.longitude, this.state.location.coords.latitude];
+    this.props.navigation.navigate('FormPage', {coordinates : coordinates});
+  }
+
+
   render() {
     return (
     	//<View> acts like the way <div> does in JavaScript
@@ -16,18 +55,19 @@ export default class GreetingPage extends Component {
 
       	<View style={styles.titleContainer}>
       		<Text style={styles.title}>
-      			[Place text here!]
+      			Ensure that location services are enabled!
       		</Text>
       	</View>
 
-      	<TouchableHighlight 
-      		style={styles.first_button_container} 
-      		onPress={() => this.props.navigation.navigate('FormPage')}>
+      	<TouchableHighlight
+      		style={styles.first_button_container}
+      		onPress={() => { this.moveToFormPage()
+          }}>
 
       		<View style={styles.press_button}>
 
       			<View>
-      			<Text style={styles.current_location_title}> 
+      			<Text style={styles.current_location_title}>
       				Use Current Location
       			</Text>
       			</View>
@@ -40,15 +80,13 @@ export default class GreetingPage extends Component {
 
       	</TouchableHighlight>
 
-      	<TouchableHighlight
-      		style={styles.second_button_container}
-      		onPress={() => this.props.navigation.navigate('FormPage')}>
+      	<TouchableHighlight style={styles.second_button_container}>  
       		<View style={styles.press_button}>
 
       			<View>
-      			<Text style={styles.current_location_title}> 
-      				Drop Pin
-      			</Text>
+      			 <Text style={styles.current_location_title}>
+      			  Drop Pin
+      			 </Text>
       			</View>
 
       			<View marginTop = {20}>
@@ -82,7 +120,8 @@ const styles = StyleSheet.create( {
   	marginTop: 10,
   	textAlign: 'center',
   	opacity: 0.9,
-  	fontSize: 30
+  	fontSize: 18,
+    fontStyle: 'italic'
   },
   current_location_title: {
   	color: '#FFF',
