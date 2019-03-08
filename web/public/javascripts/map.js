@@ -17,18 +17,14 @@ L.geoJson(points, {
 		//return L.circleMarker(latlng);
 		return L.marker(latlng);
 	}
-}).bindPopup(function (layer) {
-	// layer.feature.geometry gives you access to all the fields
-
-	// show the details of the point in a sidebar
-	showDetails(layer)
-
-	return "<p>" + JSON.stringify(layer.feature.geometry) + "</p>";
-}).addTo(map)
+}).on('click', showDetails).addTo(map)
 
 // show details about point
-// layer is the dictionary that holds info about the point
-function showDetails(layer) {
+// e is the event info
+function showDetails(e) {
+	// layer.feature.geometry gives you access to all the fields
+	let layer = e.layer
+	
 	let sideBar = document.getElementById('sidebar')
 
 	if (getComputedStyle(sideBar).visibility === 'hidden') {
