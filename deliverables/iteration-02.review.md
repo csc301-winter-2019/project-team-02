@@ -23,12 +23,13 @@
 
 1. Code reviews were expected to be thorough but ended up being blindly approved. Considering that none of us are fully familiar with all the tools we are using, people weren't equipped to thoroughly review code.
 2. A lot of the time we had conflicts when trying to merge our code because the master branch was too far behind where we were trying to merge. This is because the testing process was very arbitrary so a lot of tasks were sitting idle untested. This is important so that all of us can get to know how the entire app works, and get experience with all the tools.
+3. In the beginning, we decided to split into web and mobile sub teams. However, this resulted in a clear gap between people working on mobile vs. web. People from the web team were unaware of what was going on with what the mobile team was doing and vice versa. As a result, time was wasted during weekly meetings when discussing our weekly progress, as team members had to explain the work that they did to team members who were unfamiliar.
 
 #### Planned changes
 
-1. Because not all team members were not fully familiar with the code they were reviewing, we decided that only the team members who are actively involved in that particular part of development should review the code. For example, if a pull request was created that contained changes to the mobile application, then only Andrew and Fahim need to review it since they worked the most on mobile.
+1. Since all the team members were not fully familiar with the code they were reviewing, we decided that only the team members who are actively involved in that particular part of development should review the code. For example, if a pull request was created that contained changes to the mobile application, then only Andrew and Fahim need to review it since they worked the most on mobile.
 2. Because the master branch was always behind the qa branch, we came up with the decision to reserve 30-45 minutes during our weekly Tuesday meeeting to test the qa branch and update the master branch. Another approach we are thinking of is to schedule a 1 hour meeting on another day and dedicate it to perform testing and update the master branch. We have a testing heroku application deployed just for testing. Our testing strategy will be to update the testing app with the qa branch and perform manual testing to see if the functionality is correct. Once we verify that the application works as expected, we will merge the qa branch into master.
-3. There was a clear gap between people working on mobile vs. web. We plan on switching the roles for the next iteration, so the people who worked on mobile will now work on web, and vice versa.
+3. To address the issue of disconnect between sub teams, we plan on switching the roles for the next iteration, so the people who worked on mobile will now work on web, and vice versa. This will allow team members to better understand different parts of the application and save us time during our weekly updates, as it eliminates the confusion unfamiliar parts.
 
 ## Product - Review
 
