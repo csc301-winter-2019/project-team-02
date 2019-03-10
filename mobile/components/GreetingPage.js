@@ -5,96 +5,111 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Location, Permissions, Constants } from 'expo';
 
 export default class GreetingPage extends Component {
-	//Every component needs a render() function
   state = {
-    location: null,
+    isLoading: true,
     errorMessage: null,
+    locationResult: null,
   };
 
-  componentWillMount() {
-    if (Platform.OS === 'android' && !Constants.isDevice) {
-      this.setState({
-        errorMessage: 'This will not work on an android device',
-      });
-    } else {
+  // runs as soon as page is loaded
+  componentDidMount() {
+      // immediately attempt to get the location
       this._getLocationAsync();
-    }
   }
 
   _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') {
-      this.setState({
-        errorMessage: 'Permission to access location was denied',
+    // ask location services to allow location access to THIS app.
+    // Note: location services itself must still be enabled for this!
+    const {status} = await Permissions.askAsync(Permissions.LOCATION);
+    if (status === 'granted') {
+      // try to actually get the location asynchronously - a Promise
+      Location.getCurrentPositionAsync({enableHighAccuracy: true}).then((position) => {
+        this.setState({locationResult: position.coords});
+        // since we are guaranteed to have the location here, its safe to load the full view
+        this.setState({isLoading: false});
+      }).catch((e) => {
+        alert(e + ' Please make sure your location (GPS) is turned on.');
       });
-    }
 
-    let location = await Location.getCurrentPositionAsync({});
-     this.setState({ location });
+    } else {
+      // if the user pressed "Deny" or something on the promt
+      throw new Error('Location permission not granted');
+    }
   };
 
   moveToFormPage = () => {
-    this._getLocationAsync;
-    if (this.state.location === null)  {
-      Alert.alert("There was a problem accessing your location");
-      return;
-    }
-    const coordinates = [this.state.location.coords.longitude, this.state.location.coords.latitude];
-    this.props.navigation.navigate('FormPage', {coordinates : coordinates});
-  }
+    this.props.navigation.navigate('FormPage',
+      {coordinates : [
+          this.state.locationResult.longitude,
+          this.state.locationResult.latitude]
+      });
+  };
 
 
   render() {
+    //<View> acts like the way <div> does in JavaScript
+    //style={...} stores properties about where you want the component to be placed
+    //and how you want it to look. It's similar to adding CSS styles to HTML elements
+    //when creating web pages
+
+    // initialy show a loading screen when trying to get location on load
+    if (this.state.isLoading) {
+      return (
+        <View style={styles.container}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>
+              Trying to get location...
+            </Text>
+          </View>
+        </View>
+      )
+    }
+
     return (
-    	//<View> acts like the way <div> does in JavaScript
-    	//style={...} stores properties about where you want the component to be placed
-    	//and how you want it to look. It's similar to adding CSS styles to HTML elements
-    	//when creating web pages
 
       <View style={styles.container}>
 
-      	<View style={styles.titleContainer}>
-      		<Text style={styles.title}>
-      			Ensure that location services are enabled!
-      		</Text>
-      	</View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>
+            Welcome to Helpthehome!
+          </Text>
+        </View>
 
-      	<TouchableHighlight
-      		style={styles.first_button_container}
-      		onPress={() => { this.moveToFormPage()
-          }}>
+        <TouchableHighlight
+          style={styles.first_button_container}
+          onPress={() => { this.moveToFormPage() }}>
 
-      		<View style={styles.press_button}>
+          <View style={styles.press_button}>
 
-      			<View>
-      			<Text style={styles.current_location_title}>
-      				Use Current Location
-      			</Text>
-      			</View>
+            <View>
+            <Text style={styles.current_location_title}>
+              Use Current Location
+            </Text>
+            </View>
 
-      			<View marginTop = {20}>
-      				<Ionicons name="md-locate" size={40} color="white"/>
-      			</View>
+            <View marginTop = {20}>
+              <Ionicons name="md-locate" size={40} color="white"/>
+            </View>
 
-      		</View>
+          </View>
 
-      	</TouchableHighlight>
+        </TouchableHighlight>
 
-      	<TouchableHighlight style={styles.second_button_container}>  
-      		<View style={styles.press_button}>
+        <TouchableHighlight disabled style={styles.second_button_container}>
+          <View style={styles.press_button}>
 
-      			<View>
-      			 <Text style={styles.current_location_title}>
-      			  Drop Pin
-      			 </Text>
-      			</View>
+            <View>
+             <Text style={styles.current_location_title}>
+              Drop Pin
+             </Text>
+            </View>
 
-      			<View marginTop = {20}>
-      				<Ionicons name="md-pin" size={40} color="white"/>
-      			</View>
+            <View marginTop = {20}>
+              <Ionicons name="md-pin" size={40} color="white"/>
+            </View>
 
-      		</View>
-      	</TouchableHighlight>
+          </View>
+        </TouchableHighlight>
 
       </View>
     );
@@ -110,42 +125,42 @@ const styles = StyleSheet.create( {
     alignItems: 'stretch'
   },
   titleContainer: {
-  	flex: 3,
+    flex: 3,
     //position: 'absolute',
     marginTop: 205,
     //flexGrow: 1
   },
   title: {
-  	color: '#FFF',
-  	marginTop: 10,
-  	textAlign: 'center',
-  	opacity: 0.9,
-  	fontSize: 18,
+    color: '#FFF',
+    marginTop: 10,
+    textAlign: 'center',
+    opacity: 0.9,
+    fontSize: 18,
     fontStyle: 'italic'
   },
   current_location_title: {
-  	color: '#FFF',
-  	marginTop: 15,
-  	textAlign: 'center',
-  	opacity: 0.9,
-  	fontSize: 20
+    color: '#FFF',
+    marginTop: 15,
+    textAlign: 'center',
+    opacity: 0.9,
+    fontSize: 20
   },
   first_button_container: {
-  	flex: 1,
-  	//position: 'absolute',
-  	//marginTop: 360,
-  	backgroundColor: '#c0392b',
-  	flexDirection: 'row',
-  	justifyContent: 'center',
-  	alignItems: 'stretch'
+    flex: 1,
+    //position: 'absolute',
+    //marginTop: 360,
+    backgroundColor: '#c0392b',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'stretch'
   },
   press_button: {
-  	flexDirection: 'column',
-  	justifyContent: 'center',
-  	alignItems: 'center'
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   second_button_container: {
-  	flex: 1,
-  	backgroundColor: '#535c68'
+    flex: 1,
+    backgroundColor: '#535c68'
   }
 })
