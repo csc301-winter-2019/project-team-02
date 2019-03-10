@@ -9,10 +9,10 @@
 
 #### Decisions that turned out well
 
-1. One process-related decision that turned out to be sucessful was our weekly meetings on Tuesday. These meetings allowed us to review what each member did the previous week and assign tasks for what each member had to do the coming week.
+1. One process-related decision that turned out to be successful was our weekly meetings on Tuesday. These meetings allowed us to review what each member did the previous week and assign tasks for what each member had to do the coming week.
 
 
-2. Another process-related decision that turned out to be successful was using the Trello board to manage tasks. This allowed all the members to see the status of tasks so that people don't end up doing the same thing by mistake. Trello also allowed us to flesh out the details of what is expected from a task by defining an "Acceptance Criteria" (insert acceptance criteria sample from Trello).
+2. Another process-related decision that turned out to be successful was using the Trello board to manage tasks. This allowed all the members to see the status of tasks so that people don't end up doing the same thing by mistake. Trello also allowed us to flesh out the details of what is expected from a task by defining an "Acceptance Criteria".
 ![](https://i.imgur.com/XrRxlji.png)
 
 3. Using Slack as our primary communication channel was a good decision as Slack makes several auxiliary tasks easier. With Slack we can easily create and keep track of communication channels that each serve a specific purpose, and record communications that we would need as artifacts (e.g. meetingnotes channel)
@@ -28,8 +28,8 @@
 #### Planned changes
 
 1. Since all the team members were not fully familiar with the code they were reviewing, we decided that only the team members who are actively involved in that particular part of development should review the code. For example, if a pull request was created that contained changes to the mobile application, then only Andrew and Fahim need to review it since they worked the most on mobile.
-2. Because the master branch was always behind the qa branch, we came up with the decision to reserve 30-45 minutes during our weekly Tuesday meeeting to test the qa branch and update the master branch. Another approach we are thinking of is to schedule a 1 hour meeting on another day and dedicate it to perform testing and update the master branch. We have a testing heroku application deployed just for testing. Our testing strategy will be to update the testing app with the qa branch and perform manual testing to see if the functionality is correct. Once we verify that the application works as expected, we will merge the qa branch into master.
-3. To address the issue of disconnect between sub teams, we plan on switching the roles for the next iteration, so the people who worked on mobile will now work on web, and vice versa. This will allow team members to better understand different parts of the application and save us time during our weekly updates, as it eliminates the confusion unfamiliar parts.
+2. Because the master branch was always behind the qa branch, we came up with the decision to reserve 30-45 minutes during our weekly Tuesday meeting to test the qa branch and update the master branch. Another approach we are thinking of is to schedule a 1 hour meeting on another day and dedicate it to perform testing and update the master branch. We have a testing Heroku application deployed just for testing. Our testing strategy will be to update the testing app with the qa branch and perform manual testing to see if the functionality is correct. Once we verify that the application works as expected, we will merge the qa branch into master.
+3. To address the issue of disconnect between sub teams, we plan on switching the roles for the next iteration, so the people who worked on mobile will now work on web, and vice versa. This will allow team members to better understand different parts of the application and save us time during our weekly updates, as it eliminates the confusion of unfamiliar parts.
 
 ## Product - Review
 
