@@ -27,10 +27,9 @@ if (env === 'development') {
 	uri = 'mongodb://localhost:27017/helpthehome'
 	// use for small testing only if really necessary
 	// uri = 'mongodb+srv://development:dreamteam@cluster0-krnr4.mongodb.net/helpthehome?retryWrites=true'
-} else if (env === 'qa') {
+} else {
+	// for qa and production set it on heroku config vars
 	uri = process.env.MONGODB_URI
-} else if (env === 'production') {
-	uri = ''
 }
 
 // Mongoose connection to MongoDB
