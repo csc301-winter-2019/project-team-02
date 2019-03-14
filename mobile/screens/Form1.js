@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import {Text, Alert, AppRegistry, StyleSheet, View } from 'react-native';
 import { Button, Input, CheckBox } from 'react-native-elements';
+import { Constants } from 'expo';
 
 export default class Form1 extends Component {
+  getApiUrl() {
+    var releaseChannel = Constants.manifest.releaseChannel;
+    if (releaseChannel === undefined) return Constants.manifest.extra.apiUrl.dev
+    if (releaseChannel.indexOf('prod') !== -1) return Constants.manifest.extra.apiUrl.prod
+    if (releaseChannel.indexOf('staging') !== -1) return Constants.manifest.extra.apiUrl.staging
+  }
+
   _onPressButton1() {
     const { navigation } = this.props;
     const coordinates = navigation.getParam('coordinates');
-    //var coordinates = this.coordinates ? coordinates : [];
-    fetch('https://helpthehome-qa.herokuapp.com/mobilerequest', {
+    var uri = this.getApiUrl();
+    fetch(uri, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -25,7 +33,6 @@ export default class Form1 extends Component {
   // TODO: handle the response from the serve and decide what to display
   // based on that
   // for now just to back to the home page
-  Alert.alert("You will now be redirected to the main page");
   this.props.navigation.navigate('GreetingPage');
 }
   _onPressButton2() {
