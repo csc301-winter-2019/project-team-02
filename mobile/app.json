@@ -27,6 +27,13 @@
     },
     "android": {
       "package": "com.yourcompany.yourappname"
+    },
+    "extra": {
+        "apiUrl": {
+          "dev": "http://192.168.0.20:3000/mobilerequest",
+          "staging": "https://helpthehome-qa.herokuapp.com/mobilerequest",
+          "prod": "https://helpthehome-prod.herokuapp.com/mobilerequest"
+        }
     }
   }
 }
