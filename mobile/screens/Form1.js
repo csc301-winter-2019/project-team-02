@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Button, View, KeyboardAvoidingView } from 'react-native';
 import { Constants } from 'expo';
 import t from 'tcomb-form-native';
 
@@ -107,7 +107,8 @@ export default class Form1 extends Component {
     //// TODO: handle the response from the serve and decide what to display
     //// based on that
     //// for now just to back to the home page
-    //this.props.navigation.navigate('GreetingPage');
+    alert("Thank you for your contribution.");
+    this.props.navigation.navigate('GreetingPage');
   }
 
   handleSubmit() {
@@ -139,7 +140,14 @@ export default class Form1 extends Component {
             value={this.state.value}
             onChange={this.onChange.bind(this)}
         />
-        <Button title="Submit" onPress={() => this.handleSubmit()} />
+        <View style={{flexDirection: 'row'}}>
+            <View style={{flex:1 , marginRight:10}} >
+                <Button title="Back" onPress={() => this.props.navigation.navigate('GreetingPage')} />
+            </View>
+            <View style={{flex:1}} >
+                <Button title="Submit" color="#841584" onPress={() => this.handleSubmit()} />
+            </View>
+        </View>
       </KeyboardAvoidingView>
     );
   }
