@@ -21,8 +21,6 @@ a {
   left: 5px;
   z-index: 2;
   width: 350px;
-  height: 275px;
-  max-height: 275px;
   position: relative;
   float: left;
   background-color: lightgrey;
@@ -34,11 +32,11 @@ a {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-#point-container {
+#report-container {
     overflow: auto;
-    max-height: 195px;
+		max-height: 750px;
 }
-#point {
+#report {
   background-color: #0CC5EA;
   width: 90%;
   margin-left: auto;
@@ -46,9 +44,26 @@ a {
   margin-bottom: 5px;
   padding: 5px;
   border-radius: 10px;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-end;
+	flex-direction: column;
+}
+#report strong {
+	font-size: 22px;
+	font-style: italic;
+	margin: auto;
+	padding: 5px;
+}
+#report span {
+	background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: lighter;
+  font-size: large;
+  text-align: center;
 }
 #close-btn-container {
-  position: fixed;
   height: 30px;
   top: 250px;
   background-color: lightgrey;

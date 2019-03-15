@@ -23,7 +23,6 @@ router.get('/map', function(req,res) {
 });
 
 router.post('/mobilerequest', function(req, res) {
-    console.log(req.body);
 	var data = req.body;
 	Points.save_request(data, function(err, result) {
 		if (err) {

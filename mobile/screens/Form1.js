@@ -94,6 +94,7 @@ export default class Form1 extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        type        : "Point",
         coordinates : coordinates,
         gender      : values.gender,
         age         : values.age,
