@@ -114,7 +114,7 @@ export default class Form1 extends Component {
      var value = this.refs.form.getValue();
      if (value) {
        this._onSubmitPress(value);
-       //this.clearForm();
+       this.clearForm();
      }
   }
 

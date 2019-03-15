@@ -42,7 +42,7 @@ function showDetails(e) {
 	let report = document.getElementById('report');
 	let prevUserInputs = report.getElementsByClassName('user-input');
 	for (let i=0; i < prevUserInputs.length; i++) {
-			prevUserInputs[i].innerHTML = "";
+		prevUserInputs[i].innerHTML = "";
 	}
 
 	// put gender of the person
@@ -55,14 +55,14 @@ function showDetails(e) {
 	let ageRangeTextSpan = document.getElementById('report-age-range');
 	ageRangeTextSpan.className = 'user-input';
 	let ageRangeText = document.createTextNode(
-			" ~ " + layer.feature.geometry['age'] + " years");
+		" ~ " + layer.feature.geometry['age'] + " years");
 	ageRangeTextSpan.appendChild(ageRangeText);
 
 	// put race of person
 	let raceTextSpan = document.getElementById('report-race');
 	raceTextSpan.className = 'user-input';
 	let raceText = document.createTextNode(
-			Races[layer.feature.geometry['race']]
+		Races[layer.feature.geometry['race']]
 	);
 	raceTextSpan.appendChild(raceText);
 
