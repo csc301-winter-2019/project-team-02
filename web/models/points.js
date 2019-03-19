@@ -5,10 +5,12 @@ var Schema = mongoose.Schema;
 var JsonSchema = new Schema({
 	type: String,
 	coordinates: Array,
-	ageRange: String,
-	clothingDescription: String,
-	isInjured: Boolean,
-	reasonForHelp: String
+	gender: String,
+	age: String,
+	race: String,
+	longhair: Boolean,
+	longbeard: Boolean,
+	extra: String
 });
 
 // Mongoose Model definition
