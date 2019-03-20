@@ -34,7 +34,7 @@ a {
 }
 #report-container {
   overflow: auto;
-  max-height: 750px;
+  max-height: 500px;
 }
 #report {
   background-color: #0CC5EA;
@@ -45,7 +45,6 @@ a {
   padding: 5px;
   border-radius: 10px;
   display: flex;
-  flex-flow: row wrap;
   justify-content: flex-end;
   flex-direction: column;
 }
@@ -62,6 +61,8 @@ a {
   font-weight: lighter;
   font-size: large;
   text-align: center;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 #close-btn-container {
   height: 30px;
