@@ -2,6 +2,14 @@
 // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 //     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 // }).addTo(map);
+let currPoint
+
+let orangeIcon = L.icon({
+	iconUrl: '../assets/orange-icon.png',
+	iconSize: [25, 41],
+    iconAnchor: [12, 41]
+})
+
 
 function plotPointsOnMap(points) {
 	L.geoJson(points, {
@@ -22,6 +30,13 @@ function plotPointsOnMap(points) {
 function showDetails(e) {
 	// layer.feature.geometry gives you access to all the fields
 	let layer = e.layer
+	console.log(e)
+	//layer._icon.src = '../assets/blue-icon.png'
+	console.log(e.layer._icon.src)
+	console.log(L.Icon.Default.prototype.options)
+	console.log(L.Marker.prototype.options.icon)
+	currPoint = layer
+	console.log(currPoint)
 	
 	let sideBar = document.getElementById('sidebar')
 
@@ -76,8 +91,22 @@ function showDetails(e) {
 	helpReasonTextSpan.appendChild(helpReasonText)
 	point.appendChild(helpReasonTextSpan)
 
+	// let pendingBtn = document.getElementById('pending-btn')
+	// pendingBtn.addEventListener('click', markAsPending)
+
+	// let completedBtn = document.getElementById('completed-btn')
+	// completedBtn.addEventListener('click', markAsCompleted)
+
 	let closeBtn = document.getElementById('close-btn')
 	closeBtn.addEventListener('click', closeDetails)
+}
+
+function markAsPending(e) {
+	currPoint.src = '../assets/orange-icon.png'
+}
+
+function markAsCompleted(e) {
+	map.removeLayer(currPoint)
 }
 
 function closeDetails(e) {
