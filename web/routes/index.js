@@ -23,14 +23,7 @@ router.get('/map', function(req,res) {
 });
 
 router.post('/mobilerequest', function(req, res) {
-	var data = {
-		'coordinates': req.body.coordinates,
-		'type': req.body.type,
-		'isInjured': req.body.isInjured,
-		'reasonForHelp': req.body.reasonForHelp,
-		'ageRange': req.body.ageRange,
-		'clothingDescription': req.body.clothingDescription
-	}
+	var data = req.body;
 	Points.save_request(data, function(err, result) {
 		if (err) {
 			console.log(`err inserting mobile request into db: ${err}`);
@@ -44,7 +37,7 @@ router.post('/mobilerequest', function(req, res) {
 			res.status(200).send({'status': 'success', 'data': data});
 		}
 	});
-	
+
 });
 
 
