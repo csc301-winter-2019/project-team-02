@@ -4,13 +4,6 @@
 // }).addTo(map);
 let currPoint
 
-let orangeIcon = L.icon({
-	iconUrl: '../assets/orange-icon.png',
-	iconSize: [25, 41],
-    iconAnchor: [12, 41]
-})
-
-
 const Races = {
 	"White"     : "European or White",
 	"eAsian"    : "East Asian",
@@ -38,7 +31,6 @@ function plotPointsOnMap(points) {
 // e is the event info
 function showDetails(e) {
 	// layer.feature.geometry gives you access to all the fields
-<<<<<<< HEAD
 	let layer = e.layer
 	console.log(e)
 	//layer._icon.src = '../assets/blue-icon.png'
@@ -49,11 +41,6 @@ function showDetails(e) {
 	console.log(currPoint)
 	
 	let sideBar = document.getElementById('sidebar')
-=======
-	let layer = e.layer;
-
-	let sideBar = document.getElementById('sidebar');
->>>>>>> master
 
 	if (getComputedStyle(sideBar).visibility === 'hidden') {
 		sideBar.style.visibility = 'visible';
@@ -101,18 +88,18 @@ function showDetails(e) {
 	let extraText = document.createTextNode(layer.feature.geometry['extra']);
 	extraTextSpan.appendChild(extraText);
 
-	// let pendingBtn = document.getElementById('pending-btn')
-	// pendingBtn.addEventListener('click', markAsPending)
+	let pendingBtn = document.getElementById('pending-btn')
+	pendingBtn.addEventListener('click', markAsPending)
 
-	// let completedBtn = document.getElementById('completed-btn')
-	// completedBtn.addEventListener('click', markAsCompleted)
+	let completedBtn = document.getElementById('completed-btn')
+	completedBtn.addEventListener('click', markAsCompleted)
 
 	let closeBtn = document.getElementById('close-btn')
 	closeBtn.addEventListener('click', closeDetails)
 }
 
 function markAsPending(e) {
-	currPoint.src = '../assets/orange-icon.png'
+	currPoint._icon.src = '../assets/orange-icon.png'
 }
 
 function markAsCompleted(e) {
