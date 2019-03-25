@@ -37,7 +37,7 @@ router.post('/mobilerequest', function(req, res) {
 	}
 
 	if (!glookup.hasContainers(point)) {
-		var errMssg = "Sorry, we currently only support locations strictly within the City of Toronto";
+		var errMssg = "Sorry, we currently only support locations strictly within the City of Toronto.";
 		return res.status(200).send({ error: errMssg });
 	}
 
