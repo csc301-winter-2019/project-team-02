@@ -4,7 +4,7 @@ var Mockpoints = require('../models/mockpoints');
 var Points = require('../models/points');
 var fs = require("fs");
 var GeoJsonGeometriesLookup = require('geojson-geometries-lookup');
-var torontoNeighbourhoords = JSON.parse(fs.readFileSync(__dirname + '/../../data/Neighbourhoods.geojson', "utf8"));
+var torontoNeighbourhoords = JSON.parse(fs.readFileSync(__dirname + '/../data/Neighbourhoods.geojson', "utf8"));
 
 const connections = [];
 const glookup = new GeoJsonGeometriesLookup(torontoNeighbourhoords);
