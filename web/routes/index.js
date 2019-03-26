@@ -33,7 +33,7 @@ router.post('/mobilerequest', function(req, res) {
 
 	if (!point.coordinates.length) {
 		var errMssg = "Coordinates field must not be empty in a request.";
-		return res.status(200).send({ error: errMssg });
+		return res.status(422).send({ error: errMssg });
 	}
 
 	if (!glookup.hasContainers(point)) {
