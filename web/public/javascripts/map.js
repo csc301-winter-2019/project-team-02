@@ -32,13 +32,7 @@ function plotPointsOnMap(points) {
 function showDetails(e) {
 	// layer.feature.geometry gives you access to all the fields
 	let layer = e.layer
-	console.log(e)
-	//layer._icon.src = '../assets/blue-icon.png'
-	console.log(e.layer._icon.src)
-	console.log(L.Icon.Default.prototype.options)
-	console.log(L.Marker.prototype.options.icon)
 	currPoint = layer
-	console.log(currPoint)
 	
 	let sideBar = document.getElementById('sidebar')
 
