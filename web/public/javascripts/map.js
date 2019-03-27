@@ -2,7 +2,6 @@
 // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 //     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 // }).addTo(map);
-let currPoint;
 
 const Races = {
 	"White"     : "European or White",
@@ -32,8 +31,7 @@ function plotPointsOnMap(points) {
 function showDetails(e) {
 	// layer.feature.geometry gives you access to all the fields
 	let layer = e.layer;
-	currPoint = layer;
-	
+
 	let sideBar = document.getElementById('sidebar');
 
 	if (getComputedStyle(sideBar).visibility === 'hidden') {
@@ -82,27 +80,13 @@ function showDetails(e) {
 	let extraText = document.createTextNode(layer.feature.geometry['extra']);
 	extraTextSpan.appendChild(extraText);
 
-	let pendingBtn = document.getElementById('pending-btn');
-	pendingBtn.addEventListener('click', markAsPending);
-
-	let completedBtn = document.getElementById('completed-btn');
-	completedBtn.addEventListener('click', markAsCompleted);
-
-	let closeBtn = document.getElementById('close-btn');
-	closeBtn.addEventListener('click', closeDetails);
-}
-
-function markAsPending(e) {
-	currPoint._icon.src = '../assets/orange-icon.png';
-}
-
-function markAsCompleted(e) {
-	map.removeLayer(currPoint);
+	let closeBtn = document.getElementById('close-btn')
+	closeBtn.addEventListener('click', closeDetails)
 }
 
 function closeDetails(e) {
 	let details = document.getElementById('sidebar')
-	details.style.visibility = 'hidden';
+	details.style.visibility = 'hidden'
 }
 
 // different basemap
