@@ -5,9 +5,10 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import GreetingPage from './components/GreetingPage';
 import FormPage from './screens/Form1';
+import MapPage from './screens/MapPage';
 
 
-const RootStack = createStackNavigator( {GreetingPage: GreetingPage, FormPage: FormPage,},
+const RootStack = createStackNavigator( {GreetingPage: GreetingPage, FormPage: FormPage, MapPage: MapPage},
 	{headerMode: 'none'})
 
 const App = createAppContainer(RootStack)
