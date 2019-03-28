@@ -47,7 +47,7 @@ router.post('/mobilerequest', function(req, res) {
 		} else {
 			// send event to all connections
 			for(var i = 0; i < connections.length; i++) {
-				connections[i].sseSend(point);
+				connections[i].sseSend(result);
 			}
 			console.log(result);
 			res.status(201).send({'status': 'success'});

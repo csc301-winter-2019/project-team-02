@@ -178,7 +178,7 @@ if (window.EventSource) {
 		var data = JSON.parse(e.data);
 		if (data.coordinates) {
 			points.push(data);
-			plotPointsOnMap(points);
+			plotPointsOnMap(data);
 		}
 	}, false)
 
