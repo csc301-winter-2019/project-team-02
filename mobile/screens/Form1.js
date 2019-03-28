@@ -101,7 +101,8 @@ export default class Form1 extends Component {
         race        : values.race,
         longhair    : values.longhair,
         longbeard   : values.longbeard,
-        extra       : (values.extra) ? values.extra : ""
+        extra       : (values.extra) ? values.extra : "",
+		status      : "new"
       }),
     });
     //// TODO: handle the response from the serve and decide what to display
