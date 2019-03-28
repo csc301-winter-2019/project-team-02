@@ -43,12 +43,15 @@ export default class Form1 extends Component {
 	          this.state.markers[0].latlng.longitude,
 	          this.state.markers[0].latlng.latitude]
 	      });
-  };
+  	};
+  	moveToGreetingPage = () => {
+    	this.props.navigation.navigate('GreetingPage');
+  	}
 
 	render() {
 	    return (
 	    	<View style={{flex:1,}}>
-		    	<View style={{flex:1}}>
+		    	<View style={{flex:3}}>
 			  		<MapView
 			    		style={{ flex: 1 }}
 			    		initialRegion={{
@@ -74,6 +77,13 @@ export default class Form1 extends Component {
 					 		Proceed
 					 	</Text>
 				</TouchableHighlight>
+				<TouchableHighlight 
+			  	style={styles.second_button_container}
+			  	onPress={() => { this.moveToGreetingPage() }}>
+					 	<Text style={styles.proceed_title}>
+					 		Back
+					 	</Text>
+				</TouchableHighlight>
 			</View>
 	    );
   }
@@ -81,6 +91,16 @@ export default class Form1 extends Component {
 }
 const styles = StyleSheet.create( {
 	first_button_container: {
+	width: '100%',
+	flex: 1,
+	position: 'absolute',
+    bottom:60,
+    backgroundColor: '#c0392b',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'stretch'
+  },
+  second_button_container: {
 	width: '100%',
 	flex: 1,
 	position: 'absolute',
