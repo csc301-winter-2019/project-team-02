@@ -10,7 +10,8 @@ var dumbJsonSchema = new Schema({
 	race: String,
 	longhair: Boolean,
 	longbeard: Boolean,
-	extra: String
+	extra: String,
+	status: String
 });
 
 // Mongoose Model definition

@@ -10,7 +10,8 @@ var JsonSchema = new Schema({
 	race: String,
 	longhair: Boolean,
 	longbeard: Boolean,
-	extra: String
+	extra: String,
+	status: String
 });
 
 // Mongoose Model definition
@@ -25,10 +26,28 @@ exports.get_points = function(callback) {
 	});
 }
 
+exports.get_all_active_points = function(callback) {
+	var activeStatusTypes = ["new", "pending"];
+	Json.find({ status: { $in: activeStatusTypes } }).exec(function(err, docs) {
+		if (err) callback(err, null);
+		callback(null, docs);
+	});
+}
+
 // this function stores A user report into the db
 exports.save_request = function(data, callback) {
 	Json.create(data, function(err, result) {
 		if (err) callback(err, null);
 		callback(null, result);
 	});
+}
+
+exports.update_point_status = function(id, newStatus, callback) {
+	Json.findByIdAndUpdate(id, {status: newStatus}, {new: true},
+		function(err, result) {
+			if (err) callback(err, null);
+			// result contains the updated point document
+			callback(null, result);
+		}
+	);
 }
