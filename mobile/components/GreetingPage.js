@@ -84,13 +84,13 @@ export default class GreetingPage extends Component {
 
           <View style={styles.press_button}>
 
-            <View>
+            <View padding={15}>
             <Text style={styles.current_location_title}>
               Use Current Location
             </Text>
             </View>
 
-            <View marginTop = {20}>
+            <View marginTop = {5}>
               <Ionicons name="md-locate" size={40} color="white"/>
             </View>
 
@@ -103,13 +103,13 @@ export default class GreetingPage extends Component {
           onPress={() => { this.moveToMapPage() }}>
           <View style={styles.press_button}>
 
-            <View>
+            <View padding={15}>
              <Text style={styles.current_location_title}>
               Drop Pin
              </Text>
             </View>
 
-            <View marginTop = {20}>
+            <View>
               <Ionicons name="md-pin" size={40} color="white"/>
             </View>
 
@@ -145,7 +145,6 @@ const styles = StyleSheet.create( {
   },
   current_location_title: {
     color: '#FFF',
-    marginTop: 15,
     textAlign: 'center',
     opacity: 0.9,
     fontSize: 20
@@ -160,12 +159,16 @@ const styles = StyleSheet.create( {
     alignItems: 'stretch'
   },
   press_button: {
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // padding:5,
     alignItems: 'center'
   },
   second_button_container: {
     flex: 1,
-    backgroundColor: '#535c68'
+    backgroundColor: '#535c68',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'stretch'
   }
 })
