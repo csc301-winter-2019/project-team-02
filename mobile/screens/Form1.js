@@ -102,7 +102,7 @@ export default class Form1 extends Component {
         longhair    : values.longhair,
         longbeard   : values.longbeard,
         extra       : (values.extra) ? values.extra : "",
-		status      : "new"
+        status      : "new"
       }),
     });
     //// TODO: handle the response from the serve and decide what to display
