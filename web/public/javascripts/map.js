@@ -13,11 +13,23 @@ const Races = {
 	"Other"     : "Other",
 };
 
+const PendingIcon = new L.Icon({
+	iconAnchor: [ 12, 41 ],
+	iconUrl: "../assets/orange-icon.png",
+	iconSize: [ 25, 41 ],
+	popupAnchor: [ 1, -34 ],
+	shadowSize: [ 41, 41 ],
+	tooltipAnchor: [ 16, -28 ]
+});
+
 function plotPointsOnMap(points) {
 	L.geoJson(points, {
 		pointToLayer: function (feature, latlng) {
 			//return L.circleMarker(latlng);
 			latlngbounds.extend(latlng);
+			if (feature.status === "pending") {
+				return L.marker(latlng, {icon: PendingIcon});
+			}
 			return L.marker(latlng);
 		}
 	}).on('click', showDetails).addTo(map);
@@ -33,7 +45,7 @@ function showDetails(e) {
 	// layer.feature.geometry gives you access to all the fields
 	let layer = e.layer;
 	currPoint = layer;
-	
+
 	let sideBar = document.getElementById('sidebar');
 
 	if (getComputedStyle(sideBar).visibility === 'hidden') {
@@ -93,16 +105,56 @@ function showDetails(e) {
 }
 
 function markAsPending(e) {
-	currPoint._icon.src = '../assets/orange-icon.png';
+	let currPointDetails = currPoint.feature.geometry;
+	let currPointId = currPointDetails._id;
+	if (currPointDetails.status === "pending") return;
+
+	updatePointStatusInDb(currPointId, "pending")
+		.then(function(responseJson) {
+			alert("Your change has been saved.");
+			currPoint._icon.src = '../assets/orange-icon.png';
+		})
+		.catch(function(error) {
+			alert(error);
+		});
 }
 
 function markAsCompleted(e) {
-	map.removeLayer(currPoint);
+	let currPointDetails = currPoint.feature.geometry;
+	let currPointId = currPointDetails._id;
+	if (currPointDetails.status === "complete") return;
+
+	updatePointStatusInDb(currPointId, "complete")
+		.then(function(responseJson) {
+			alert("Your change has been saved.");
+			map.removeLayer(currPoint);
+		})
+		.catch(function(error) {
+			alert(error);
+		});
+	closeDetails();
 }
 
 function closeDetails(e) {
 	let details = document.getElementById('sidebar')
 	details.style.visibility = 'hidden';
+}
+
+// returns a Promise object
+function updatePointStatusInDb(pointId, pointStatus) {
+	return fetch('/savestatus/' + pointStatus, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({id: pointId}),
+	})
+	.then(function(response) {
+		if (response.ok) {
+			return response.json();
+		}
+		throw new Error("We were unable to save your changes.");
+	});
 }
 
 // different basemap
