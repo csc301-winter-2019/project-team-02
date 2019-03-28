@@ -14,10 +14,10 @@ export default class GreetingPage extends Component {
   // runs as soon as page is loaded
   componentDidMount() {
       // immediately attempt to get the location
-      this._getLocationAsync();
+      // this._getLocationAsync();
   }
 
-  _getLocationAsync = async () => {
+  moveToFormPage = async () => {
     // ask location services to allow location access to THIS app.
     // Note: location services itself must still be enabled for this!
     const {status} = await Permissions.askAsync(Permissions.LOCATION);
@@ -27,6 +27,12 @@ export default class GreetingPage extends Component {
         this.setState({locationResult: position.coords});
         // since we are guaranteed to have the location here, its safe to load the full view
         this.setState({isLoading: false});
+        // move to form page
+        this.props.navigation.navigate('FormPage',
+        {coordinates : [
+            this.state.locationResult.longitude,
+            this.state.locationResult.latitude]
+        });
       }).catch((e) => {
         alert(e + ' Please make sure your location (GPS) is turned on.');
       });
@@ -35,14 +41,6 @@ export default class GreetingPage extends Component {
       // if the user pressed "Deny" or something on the promt
       throw new Error('Location permission not granted');
     }
-  };
-
-  moveToFormPage = () => {
-    this.props.navigation.navigate('FormPage',
-      {coordinates : [
-          this.state.locationResult.longitude,
-          this.state.locationResult.latitude]
-      });
   };
 
 
@@ -77,7 +75,7 @@ export default class GreetingPage extends Component {
 
         <TouchableHighlight
           style={styles.first_button_container}
-          onPress={() => { this.moveToFormPage() }}>
+          onPress={() => { this.moveToFormPage(); }}>
 
           <View style={styles.press_button}>
 
