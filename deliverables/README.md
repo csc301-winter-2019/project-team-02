@@ -9,7 +9,8 @@ Help the Homeless is a web and mobile application that allows homeless shelters 
 * Users from Street To Homes can view a map and see point markers overlayed on the map which represent where users of the app have submitted locations of homeless people.
 * This map is live-updating, so no refresh required.
 * Clicking on a point marker on the map brings up detailed information about the homeless person at that location.
-* 'Drop Pin' was not implemented in this iteration, although the button was made and added to our app for future use. This button currently has no functionality, but once fully implemented will allow users to select a location on the map themselves and place a pin there indicating there is a homeless person who requires help.
+* Drop Pin option allows users to place marker at location of homeless person on a map of Toronto, bypassing the need for user location. 
+*When viewing the spread of points on the map, users with access to this side can now sort between pending reports and completed reports. The markers are also colour co-ordinated to make it easier for users to tell.
 
 ## Basic instructions
 ### Web application
