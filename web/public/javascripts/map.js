@@ -24,12 +24,6 @@ function plotPointsOnMap(points) {
 		pointToLayer: function (feature, latlng) {
 			//return L.circleMarker(latlng);
 			latlngbounds.extend(latlng);
-			if (feature.status === "pending") {
-				return L.marker(latlng, {icon: orangeIcon});
-			}
-			else if (feature.status === "new") {
-				return L.marker(latlng);
-			}
 			
 		}
 	}).on('click', showDetails).addTo(map);
