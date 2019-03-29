@@ -53,7 +53,7 @@ export default class GreetingPage extends Component {
     //when creating web pages
 
     // initialy show a loading screen when trying to get location on load
-    if (this.state.isLoading && this.state.fontsLoaded) {
+    if (this.state.isLoading) {
       return (
         <View style={styles.container}>
           <View style={styles.titleContainer}>
