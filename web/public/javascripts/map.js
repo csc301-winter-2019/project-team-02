@@ -43,7 +43,7 @@ function plotPointsOnMap(points) {
 // show details about point
 // e is the event info
 function showDetails(e) {
-	if(currPoint !== null) {
+	if(currPoint !== undefined) {
 		if (currPoint.feature.geometry.status === "new") {
 			currPoint._icon.src = '../assets/blue-icon.png';
 		}
