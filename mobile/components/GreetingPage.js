@@ -6,28 +6,31 @@ import { Location, Permissions, Constants } from 'expo';
 
 export default class GreetingPage extends Component {
   state = {
-    isLoading: true,
+    isLoading: false,
     errorMessage: null,
     locationResult: null,
   };
 
-  // runs as soon as page is loaded
-  componentDidMount() {
-      // immediately attempt to get the location
-      this._getLocationAsync();
-  }
-
-  _getLocationAsync = async () => {
+  moveToFormPage = async () => {
+    this.setState({isLoading: true});
     // ask location services to allow location access to THIS app.
     // Note: location services itself must still be enabled for this!
     const {status} = await Permissions.askAsync(Permissions.LOCATION);
     if (status === 'granted') {
       // try to actually get the location asynchronously - a Promise
       Location.getCurrentPositionAsync({enableHighAccuracy: true}).then((position) => {
-        this.setState({locationResult: position.coords});
+        this.setState({locationResult: position.coords}, () => {
+          this.props.navigation.navigate('FormPage',
+          {coordinates : [
+              this.state.locationResult.longitude,
+              this.state.locationResult.latitude]
+          });
+        });
         // since we are guaranteed to have the location here, its safe to load the full view
         this.setState({isLoading: false});
+        // move to form page
       }).catch((e) => {
+        this.setState({isLoading: false});
         alert(e + ' Please make sure your location (GPS) is turned on.');
       });
 
@@ -37,13 +40,9 @@ export default class GreetingPage extends Component {
     }
   };
 
-  moveToFormPage = () => {
-    this.props.navigation.navigate('FormPage',
-      {coordinates : [
-          this.state.locationResult.longitude,
-          this.state.locationResult.latitude]
-      });
-  };
+  moveToMapPage = () => {
+    this.props.navigation.navigate('MapPage');
+  }
 
   moveToMapPage = () => {
     this.props.navigation.navigate('MapPage');
