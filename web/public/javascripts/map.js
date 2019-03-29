@@ -125,6 +125,7 @@ function markAsPending(e) {
 function markAsCompleted(e) {
 	map.removeLayer(currPoint);
 	currPoint.feature.geometry.status = "completed";
+	currPoint = undefined;
 }
 
 function closeDetails(e) {
