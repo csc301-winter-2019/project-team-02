@@ -2,7 +2,13 @@
 // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 //     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 // }).addTo(map);
-let currPoint;
+let currPoint = null;
+
+const orangeIcon = L.icon({
+    iconUrl: '../assets/orange-icon.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+});
 
 const Races = {
 	"White"     : "European or White",
@@ -18,7 +24,13 @@ function plotPointsOnMap(points) {
 		pointToLayer: function (feature, latlng) {
 			//return L.circleMarker(latlng);
 			latlngbounds.extend(latlng);
-			return L.marker(latlng);
+			if (feature.status === "pending") {
+				return L.marker(latlng, {icon: orangeIcon});
+			}
+			else if (feature.status === "new") {
+				return L.marker(latlng);
+			}
+			
 		}
 	}).on('click', showDetails).addTo(map);
 
@@ -30,10 +42,29 @@ function plotPointsOnMap(points) {
 // show details about point
 // e is the event info
 function showDetails(e) {
+	if(currPoint !== null) {
+		if (currPoint.feature.geometry.status === "new") {
+			currPoint._icon.src = '../assets/blue-icon.png';
+		}
+		else if (currPoint.feature.geometry.status === "pending") {
+			currPoint._icon.src = '../assets/orange-icon.png';
+		}
+	}
+
 	// layer.feature.geometry gives you access to all the fields
 	let layer = e.layer;
 	currPoint = layer;
 	
+	if (currPoint.feature.geometry.status === "new") {
+		currPoint._icon.src = '../assets/blue-icon-focused.png';
+	}
+	else if (currPoint.feature.geometry.status === "pending") {
+		currPoint._icon.src = '../assets/orange-icon-focused.png';
+	}
+
+	const pointBounds = [currPoint.getLatLng()];
+	map.fitBounds(pointBounds);
+
 	let sideBar = document.getElementById('sidebar');
 
 	if (getComputedStyle(sideBar).visibility === 'hidden') {
@@ -93,16 +124,25 @@ function showDetails(e) {
 }
 
 function markAsPending(e) {
-	currPoint._icon.src = '../assets/orange-icon.png';
+	currPoint._icon.src = '../assets/orange-icon-focused.png';
+	currPoint.feature.geometry.status = "pending";
 }
 
 function markAsCompleted(e) {
 	map.removeLayer(currPoint);
+	currPoint.feature.geometry.status = "completed";
 }
 
 function closeDetails(e) {
 	let details = document.getElementById('sidebar')
 	details.style.visibility = 'hidden';
+
+	if (currPoint.feature.geometry.status === "pending") {
+		currPoint._icon.src = '../assets/orange-icon.png';
+	}
+	else if (currPoint.feature.geometry.status === "new") {
+		currPoint._icon.src = '../assets/blue-icon.png';
+	}
 }
 
 // different basemap

@@ -10,7 +10,8 @@ var JsonSchema = new Schema({
 	race: String,
 	longhair: Boolean,
 	longbeard: Boolean,
-	extra: String
+	extra: String,
+	status: {type: String, default: "new"}
 });
 
 // Mongoose Model definition
