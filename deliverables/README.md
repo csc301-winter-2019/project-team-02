@@ -5,7 +5,7 @@ Help the Homeless is a web and mobile application that allows homeless shelters 
 
 ## Key Features
 * Users can send their location using the app to report where a homeless person is.
-* Users can fill out details about the homeless person before reporting them.
+* Users are required to fill out details of the homeless person before submitting in order to help authorities identify the specific individual. User Location and Drop Pin both redirect to the form a user would have to fill out. 
 * Users from Street To Homes can view a map and see point markers overlayed on the map which represent where users of the app have submitted locations of homeless people.
 * This map is live-updating, so no refresh required.
 * Clicking on a point marker on the map brings up detailed information about the homeless person at that location.
