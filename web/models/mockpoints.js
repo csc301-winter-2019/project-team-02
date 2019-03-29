@@ -11,7 +11,7 @@ var dumbJsonSchema = new Schema({
 	longhair: Boolean,
 	longbeard: Boolean,
 	extra: String,
-	status: {type: String, default: "new"}
+	status: type: String
 });
 
 // Mongoose Model definition
