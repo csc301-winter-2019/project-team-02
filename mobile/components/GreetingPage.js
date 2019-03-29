@@ -53,7 +53,7 @@ export default class GreetingPage extends Component {
     //when creating web pages
 
     // initialy show a loading screen when trying to get location on load
-    if (this.state.isLoading) {
+    if (this.state.isLoading && this.state.fontsLoaded) {
       return (
         <View style={styles.container}>
           <View style={styles.titleContainer}>
@@ -71,7 +71,10 @@ export default class GreetingPage extends Component {
 
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
-            Welcome to Helpthehome!
+            See a homeless person who might need help? {"\n\n"}TELL US!!
+          </Text>
+          <Text style={styles.subtitle}>
+            Tell us where they are ⬇ {"\n\n"}(And don't worry, we won't force you to share your location)
           </Text>
         </View>
 
@@ -125,18 +128,24 @@ const styles = StyleSheet.create( {
     alignItems: 'stretch'
   },
   titleContainer: {
-    flex: 3,
+    flex: 4,
     //position: 'absolute',
-    marginTop: 205,
+    marginTop: 100,
     //flexGrow: 1
   },
   title: {
     color: '#FFF',
-    marginTop: 10,
+    padding: 35,
     textAlign: 'center',
     opacity: 0.9,
+    fontSize: 24,
+    fontStyle: 'italic',
+  },
+  subtitle: {
+    color: "#FFF" ,
+    padding: 20,
+    textAlign: "center",
     fontSize: 18,
-    fontStyle: 'italic'
   },
   current_location_title: {
     color: '#FFF',
