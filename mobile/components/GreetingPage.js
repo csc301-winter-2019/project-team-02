@@ -45,6 +45,10 @@ export default class GreetingPage extends Component {
       });
   };
 
+  moveToMapPage = () => {
+    this.props.navigation.navigate('MapPage');
+  }
+
 
   render() {
     //<View> acts like the way <div> does in JavaScript
@@ -98,7 +102,9 @@ export default class GreetingPage extends Component {
 
         </TouchableHighlight>
 
-        <TouchableHighlight disabled style={styles.second_button_container}>
+        <TouchableHighlight 
+          style={styles.second_button_container}
+          onPress={() => { this.moveToMapPage() }}>
           <View style={styles.press_button}>
 
             <View>
