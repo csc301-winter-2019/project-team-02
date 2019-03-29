@@ -150,6 +150,7 @@ function markAsCompleted(e) {
 		.then(function(responseJson) {
 			alert("Your change has been saved.");
 			map.removeLayer(currPoint);
+			currPoint = undefined;
 		})
 		.catch(function(error) {
 			alert(error);
