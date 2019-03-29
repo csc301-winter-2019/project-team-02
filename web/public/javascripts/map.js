@@ -128,6 +128,9 @@ function markAsPending(e) {
 	let currPointId = currPointDetails._id;
 	if (currPointDetails.status === "pending") return;
 
+	currPoint._icon.src = '../assets/orange-icon-focused.png';
+	currPointDetails.status = "pending";
+
 	updatePointStatusInDb(currPointId, "pending")
 		.then(function(responseJson) {
 			alert("Your change has been saved.");
