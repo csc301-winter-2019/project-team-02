@@ -42,9 +42,28 @@ function plotPointsOnMap(points) {
 // show details about point
 // e is the event info
 function showDetails(e) {
+	if(currPoint !== undefined) {
+		if (currPoint.feature.geometry.status === "new") {
+			currPoint._icon.src = '../assets/blue-icon.png';
+		}
+		else if (currPoint.feature.geometry.status === "pending") {
+			currPoint._icon.src = '../assets/orange-icon.png';
+		}
+	}
+
 	// layer.feature.geometry gives you access to all the fields
 	let layer = e.layer;
 	currPoint = layer;
+	
+	if (currPoint.feature.geometry.status === "new") {
+		currPoint._icon.src = '../assets/blue-icon-focused.png';
+	}
+	else if (currPoint.feature.geometry.status === "pending") {
+		currPoint._icon.src = '../assets/orange-icon-focused.png';
+	}
+
+	const pointBounds = [currPoint.getLatLng()];
+	map.fitBounds(pointBounds);
 
 	let sideBar = document.getElementById('sidebar');
 
@@ -138,6 +157,13 @@ function markAsCompleted(e) {
 function closeDetails(e) {
 	let details = document.getElementById('sidebar')
 	details.style.visibility = 'hidden';
+
+	if (currPoint.feature.geometry.status === "pending") {
+		currPoint._icon.src = '../assets/orange-icon.png';
+	}
+	else if (currPoint.feature.geometry.status === "new") {
+		currPoint._icon.src = '../assets/blue-icon.png';
+	}
 }
 
 // returns a Promise object
