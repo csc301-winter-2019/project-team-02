@@ -1,5 +1,58 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to our site, please go to /map to see a map
+doctype html
+html
+  head
+    title Welcome to Helpthehome
+    link(rel='stylesheet', href='/stylesheets/home.css')
+  body
+    h1 Welcome to Helpthehome(less)
+    h2 About this project
+    p
+      | This project is under the UN's SDG Goals
+      |
+      a(href="https://www.un.org/sustainabledevelopment/sustainable-development-goals/") (Sustainable Development Goals)
+      |
+      | umbrella. The issue it tries to address, falls under Goal 1: No Poverty.
+    p
+      | Our small attempt to tackle this issue involves helping with the
+      |
+      strong visibly homeless
+      |
+      | in the City of Toronto.
+    p
+      | This project contains two main components: mobile, and web. The <strong>Mobile</strong> component consists of a mobile app through which an ordinary citizen may report the location, and a few identifying characteristics of a homeless person they see.
+      | Once they submit the report on the app, the <strong>Web</strong> component receives this report and displays it so that an outreach worker can take appropriate action.
+    p
+      | Note: We do not store any personal data from any user in order to use this service.
+    h2 How it works
+    p
+      | Adding <em>/map</em> to the URL above will load a new page with the <strong>Map</strong> of City of Toronto.
+      br
+      | On this map you will find map <strong>Markers</strong>.
+      br
+      | Each marker represents a <strong>Report</strong> sent in by our companion mobile application by an anonymous person in the city. The position of the marker on the map corresponds to the location of the homeless person in the city.
+      br
+      | This report contains useful information about spotting a homeless person. The report can be accessed by clicking on any one of the Markers.
+    p
+      | The map page can be accessed
+      |
+      a(href="/map") here
+      | .
+    h2 How it's built
+    ul
+      li Website
+        ul
+          li HTML/CSS/Javascript (ES6)
+          li MongoDB, Express, Pug, NodeJs
+          li OpenStreetMap, Leaflet.js, Jquery
+          li: a(href="https://portal0.cf.opendata.inter.sandbox-toronto.ca/dataset/neighbourhoods/") City Neighborhood data
+      li Mobile
+        ul
+          li Javascript
+          li React-Native, Expo
+    h2 Who built it
+    ul
+      li Samarth Agarwal, <a href="https://github.com/Samarth-Agarwal1">GitHub</a>
+      li Fahim Ahmed, <a href="https://github.com/fahim1997">GitHub</a>
+      li Kumar Damani, <a href="https://github.com/kdam0">GitHub</a>
+      li Andrew Mihai, <a href="https://github.com/AndrewMihai">GitHub</a>
+      li Ivan Shen, <a href="https://github.com/ivanshen">GitHub</a>
