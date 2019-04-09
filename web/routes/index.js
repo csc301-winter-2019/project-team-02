@@ -12,7 +12,8 @@ const glookup = new GeoJsonGeometriesLookup(torontoNeighbourhoords);
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	// for now just redirect to /map
-	res.redirect('/map');
+	//res.redirect('/map');
+	res.render('index');
 });
 
 /* GET Map page. */
