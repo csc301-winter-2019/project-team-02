@@ -135,7 +135,7 @@ function markAsPending(e) {
 	updatePointStatusInDb(currPointId, "pending")
 		.then(function(responseJson) {
 			alert("Your change has been saved.");
-			currPoint._icon.src = '../assets/orange-icon.png';
+			currPoint._icon.src = '../assets/orange-icon-focused.png';
 		})
 		.catch(function(error) {
 			alert(error);
@@ -151,6 +151,7 @@ function markAsCompleted(e) {
 		.then(function(responseJson) {
 			alert("Your change has been saved.");
 			map.removeLayer(currPoint);
+			currPoint = undefined;
 		})
 		.catch(function(error) {
 			alert(error);

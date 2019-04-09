@@ -3,7 +3,7 @@
 ## Iteration XX
 
  * Start date: Mar 12
- * End date: Mar 22?
+ * End date: Mar 29
 
 ## Process
 
@@ -11,6 +11,7 @@
 
  * Having a dedicated day for testing so that branches are kept up to date and master is getting consistently updated with new code. We didn't do this in the last iteration and we think it led to a bunch of code conflicts. We hope that by testing regularly, we can get code pushed to appropriate places rather than letting it just sit in its branch.
  We will be able to see if this is effective by doing a search in GitHub commits with message "resolving conflicts". (We usually put something similar in conflict merges).
+ * We will create a recurring Slack reminder in the general channel which will notify us every night to check Pull Requests. Additionally, when a developer creates a new PR, they will individually notify the reviews on Slack with the link requesting for review. This is so that tasks get to the testing phase quicker, and therefore end up getting merged back into master quicker => new tasks will have the latest master.
 
  #### Roles & responsibilities
 
@@ -48,3 +49,4 @@ Additionally, we now have staging and production deployments for the mobile side
 
  * A mobile application with the latest master branch deployed on Appetize, or a real phone (if permitted).
  * A interactive web application with the latest master branch deployed on Heroku.
+
