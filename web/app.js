@@ -25,8 +25,6 @@ var env = process.env.NODE_ENV || 'development';
 var uri;
 if (env === 'development') {
 	uri = 'mongodb://localhost:27017/helpthehome'
-	// use for small testing only if really necessary
-	// uri = 'mongodb+srv://development:dreamteam@cluster0-krnr4.mongodb.net/helpthehome_devel?retryWrites=true'
 } else {
 	// for qa and production set it on heroku config vars
 	uri = process.env.MONGODB_URI
