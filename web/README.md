@@ -8,6 +8,7 @@
 2. npm
 
 ### Steps
+
 > Docker steps below might not work on Windows. Refer to Docker docs.
 
 1. Spawn up a docker container with mongodb OR start mongo from your local install
