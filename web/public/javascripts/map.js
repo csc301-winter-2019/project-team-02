@@ -169,6 +169,7 @@ function closeDetails(e) {
 	else if (currPoint.feature.geometry.status === "new") {
 		currPoint._icon.src = '../images/blue-icon.png';
 	}
+	map.fitBounds(latlngbounds.pad(0.20));
 }
 
 // returns a Promise object
@@ -201,7 +202,10 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}
 // map to fit them all
 var latlngbounds = new L.latLngBounds();
 
-plotPointsOnMap(points);
+if (points.length) {
+	plotPointsOnMap(points);
+}
+// setup live updates
 if (window.EventSource) {
 	var source = new EventSource('/stream');
 
