@@ -15,10 +15,11 @@ const Races = {
 
 const PendingIcon = new L.Icon({
 	iconAnchor: [ 12, 41 ],
-	iconUrl: "../assets/orange-icon.png",
+	iconUrl: "../images/orange-icon.png",
 	iconSize: [ 25, 41 ],
 	popupAnchor: [ 1, -34 ],
 	shadowSize: [ 41, 41 ],
+	shadowUrl: "../images/marker-shadow.png",
 	tooltipAnchor: [ 16, -28 ]
 });
 
@@ -44,22 +45,22 @@ function plotPointsOnMap(points) {
 function showDetails(e) {
 	if(currPoint !== undefined) {
 		if (currPoint.feature.geometry.status === "new") {
-			currPoint._icon.src = '../assets/blue-icon.png';
+			currPoint._icon.src = '../images/blue-icon.png';
 		}
 		else if (currPoint.feature.geometry.status === "pending") {
-			currPoint._icon.src = '../assets/orange-icon.png';
+			currPoint._icon.src = '../images/orange-icon.png';
 		}
 	}
 
 	// layer.feature.geometry gives you access to all the fields
 	let layer = e.layer;
 	currPoint = layer;
-	
+
 	if (currPoint.feature.geometry.status === "new") {
-		currPoint._icon.src = '../assets/blue-icon-focused.png';
+		currPoint._icon.src = '../images/blue-icon-focused.png';
 	}
 	else if (currPoint.feature.geometry.status === "pending") {
-		currPoint._icon.src = '../assets/orange-icon-focused.png';
+		currPoint._icon.src = '../images/orange-icon-focused.png';
 	}
 
 	const pointBounds = [currPoint.getLatLng()];
@@ -128,13 +129,13 @@ function markAsPending(e) {
 	let currPointId = currPointDetails._id;
 	if (currPointDetails.status === "pending") return;
 
-	currPoint._icon.src = '../assets/orange-icon-focused.png';
+	currPoint._icon.src = '../images/orange-icon-focused.png';
 	currPointDetails.status = "pending";
 
 	updatePointStatusInDb(currPointId, "pending")
 		.then(function(responseJson) {
 			alert("Your change has been saved.");
-			currPoint._icon.src = '../assets/orange-icon-focused.png';
+			currPoint._icon.src = '../images/orange-icon-focused.png';
 		})
 		.catch(function(error) {
 			alert(error);
@@ -163,10 +164,10 @@ function closeDetails(e) {
 	details.style.visibility = 'hidden';
 
 	if (currPoint.feature.geometry.status === "pending") {
-		currPoint._icon.src = '../assets/orange-icon.png';
+		currPoint._icon.src = '../images/orange-icon.png';
 	}
 	else if (currPoint.feature.geometry.status === "new") {
-		currPoint._icon.src = '../assets/blue-icon.png';
+		currPoint._icon.src = '../images/blue-icon.png';
 	}
 }
 
